@@ -1094,7 +1094,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     //You could adjust the position
                     params.topMargin = (int) (event.getRawY());
                     params.leftMargin = (int) (event.getRawX());
-                    this.addView(editText, params);
                     editText.setVisibility(VISIBLE);
                     editText.setSingleLine();
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -1152,6 +1151,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             return false;
                         }
                     });
+                    this.addView(editText, params);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }

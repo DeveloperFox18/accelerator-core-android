@@ -1245,6 +1245,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             }
                             addLogEvent(OpenTokConfig.LOG_ACTION_SCREEN_CAPTURE, OpenTokConfig.LOG_VARIATION_SUCCESS);
                         }
+                    }else{
+                        Bitmap bmp = null;
+                        mListener.onScreencaptureReady(bmp);
                     }
                 }
                 if (selected) {

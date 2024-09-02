@@ -85,7 +85,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     private boolean mSignalMirrored = false;
     private boolean isStartPoint = false;
-    private boolean mMirrored = false;
+    private boolean mMirrored = true;
 
     private String canvasId;
     private boolean clear = false;
@@ -796,7 +796,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     fromX = this.width - fromX;
                     toX = this.width - toX;
                 }
-                mMirrored = videoRenderer.isMirrored();
+                mMirrored = true;
                 if (mMirrored) {
                     Log.i(LOG_TAG, "Feed is mirrored");
                     // Revert (Double negative)

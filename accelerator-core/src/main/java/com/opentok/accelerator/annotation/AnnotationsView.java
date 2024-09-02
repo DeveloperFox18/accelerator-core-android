@@ -96,6 +96,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     private OTAcceleratorSession mSession;
 
+    private String mConnectionId;
+
 
     /**
      * Monitors state changes in the Annotations component.
@@ -169,8 +171,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
      * @param isScreenSharing
      * @throws Exception
      */
-    public AnnotationsView(Context context, @NonNull OTAcceleratorSession session, String partnerId,
-                           boolean isScreenSharing) throws IllegalArgumentException {
+    public AnnotationsView(Context context, @NonNull OTAcceleratorSession session, String partnerId,boolean isScreenSharing, String connectionId) throws IllegalArgumentException {
         super(context);
 
         if (session.getConnection() == null) {
@@ -180,6 +181,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         this.mContext = context;
         this.mSession = session;
         this.mPartnerId = partnerId;
+        this.mConnectionId = connectionId;
         //add a listener for each type of signal to avoid breaking the interoperability
         this.mSession.addSignalListener(Mode.Pen.toString(), this);
         this.mSession.addSignalListener(Mode.Text.toString(), this);
@@ -602,13 +604,14 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         }
 
         try {
-            if ( mRemoteConnId != null ){
-                jsonObject.put("id", mRemoteConnId);
-            }
-            else {
-                jsonObject.put("id", mSession.getConnection().getConnectionId());
-            }
-            jsonObject.put("fromId", mSession.getConnection().getConnectionId());
+            // if ( mRemoteConnId != null ){
+            //     jsonObject.put("id", mRemoteConnId);
+            // }
+            // else {
+            //     jsonObject.put("id", mSession.getConnection().getConnectionId());
+            // }
+            jsonObject.put("id", mConnectionId);
+            jsonObject.put("fromId", mConnectionId);
             jsonObject.put("fromX", x);
             jsonObject.put("fromY", y);
             jsonObject.put("color", String.format("#%06X", (0xFFFFFF & mCurrentColor)));
@@ -616,7 +619,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("videoHeight", videoHeight);
             jsonObject.put("canvasWidth", this.width);
             jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight());
-            jsonObject.put("mirrored", mirrored);
+            jsonObject.put("mirrored", false);
             jsonObject.put("text", text);
             jsonObject.put("font", "16px Arial"); //TODO: Fix font type
             jsonObject.put("platform", SIGNAL_PLATFORM);
@@ -643,12 +646,14 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             videoHeight = videoRenderer.getVideoHeight();
         }
         try {
-            if ( mRemoteConnId != null ){
-                jsonObject.put("id", mRemoteConnId);
-            }
-            else {
-                jsonObject.put("id", mSession.getConnection().getConnectionId());
-            }
+            // if ( mRemoteConnId != null ){
+            //     jsonObject.put("id", mRemoteConnId);
+            // }
+            // else {
+            //     jsonObject.put("id", mSession.getConnection().getConnectionId());
+            // }
+
+            jsonObject.put("id", mConnectionId);
             jsonObject.put("fromId", mSession.getConnection().getConnectionId());
             jsonObject.put("fromX", mCurrentPath.getEndPoint().x);
             jsonObject.put("fromY", mCurrentPath.getEndPoint().y);
@@ -660,7 +665,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("videoHeight", videoHeight);
             jsonObject.put("canvasWidth", this.width);
             jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight());
-            jsonObject.put("mirrored", mirrored);
+            jsonObject.put("mirrored", false);
             jsonObject.put("smoothed", false);
             jsonObject.put("startPoint", startPoint);
             jsonObject.put("endPoint", endPoint);

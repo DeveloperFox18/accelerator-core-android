@@ -36,7 +36,7 @@ android {
         abortOnError false
         disable 'OldTargetApi'
     }
-
+    // add this
     libraryVariants.all { variant ->
         variant.outputs.all { output ->
             def outputFile = outputFileName

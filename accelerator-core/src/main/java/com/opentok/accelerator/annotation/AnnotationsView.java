@@ -1156,6 +1156,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             return false;
                         }
                     });
+                    //this code add via abhishek
                     this.addView(editText, params);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
@@ -1251,6 +1252,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             addLogEvent(OpenTokConfig.LOG_ACTION_SCREEN_CAPTURE, OpenTokConfig.LOG_VARIATION_SUCCESS);
                         }
                     }else{
+                        //this code add via abhishek
                         Bitmap bmp = null;
                         mListener.onScreencaptureReady(bmp);
                     }

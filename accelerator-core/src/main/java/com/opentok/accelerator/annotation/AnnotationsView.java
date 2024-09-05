@@ -614,6 +614,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             // else {
             //     jsonObject.put("id", mSession.getConnection().getConnectionId());
             // }
+            // changes done by abhishek
             jsonObject.put("id", mConnectionId);
             jsonObject.put("fromId", mConnectionId);
             jsonObject.put("fromX", x);
@@ -656,7 +657,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             // else {
             //     jsonObject.put("id", mSession.getConnection().getConnectionId());
             // }
-
+            // changes done by abhishek
             jsonObject.put("id", mConnectionId);
             jsonObject.put("fromId", mSession.getConnection().getConnectionId());
             jsonObject.put("fromX", mCurrentPath.getEndPoint().x);

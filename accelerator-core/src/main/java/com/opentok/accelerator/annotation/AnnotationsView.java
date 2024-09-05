@@ -98,6 +98,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     private String mConnectionId;
 
+    private Stream stream;
+
 
     /**
      * Monitors state changes in the Annotations component.
@@ -171,7 +173,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
      * @param isScreenSharing
      * @throws Exception
      */
-    public AnnotationsView(Context context, @NonNull OTAcceleratorSession session, String partnerId,boolean isScreenSharing, String connectionId) throws IllegalArgumentException {
+    public AnnotationsView(Context context, @NonNull OTAcceleratorSession session, String partnerId,boolean isScreenSharing, String connectionId,Stream stream) throws IllegalArgumentException {
         super(context);
 
         if (session.getConnection() == null) {
@@ -187,6 +189,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         this.mSession.addSignalListener(Mode.Text.toString(), this);
         this.mSession.addSignalListener(Mode.Undo.toString(), this);
         this.mSession.addSignalListener(Mode.Clear.toString(), this);
+
+        this.mstream = stream
 
         this.isScreenSharing = isScreenSharing;
 
@@ -615,11 +619,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("fromX", x);
             jsonObject.put("fromY", y);
             jsonObject.put("color", String.format("#%06X", (0xFFFFFF & mCurrentColor)));
-            jsonObject.put("videoWidth", videoWidth);
-            jsonObject.put("videoHeight", videoHeight);
+            jsonObject.put("videoWidth", stream.videoWidth);
+            jsonObject.put("videoHeight", stream.videoHeight);
             jsonObject.put("canvasWidth", this.width);
             jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight());
-            jsonObject.put("mirrored", false);
+            jsonObject.put("mirrored", true);
             jsonObject.put("text", text);
             jsonObject.put("font", "16px Arial"); //TODO: Fix font type
             jsonObject.put("platform", SIGNAL_PLATFORM);
@@ -661,11 +665,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("toY", y);
             jsonObject.put("color", String.format("#%06X", (0xFFFFFF & mCurrentColor)));
             jsonObject.put("lineWidth", 2);
-            jsonObject.put("videoWidth", videoWidth);
-            jsonObject.put("videoHeight", videoHeight);
+            jsonObject.put("videoWidth", stream.videoWidth);
+            jsonObject.put("videoHeight", stream.videoHeight);
             jsonObject.put("canvasWidth", this.width);
             jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight());
-            jsonObject.put("mirrored", false);
+            jsonObject.put("mirrored", true);
             jsonObject.put("smoothed", false);
             jsonObject.put("startPoint", startPoint);
             jsonObject.put("endPoint", endPoint);

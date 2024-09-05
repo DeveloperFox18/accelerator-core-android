@@ -184,13 +184,14 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         this.mSession = session;
         this.mPartnerId = partnerId;
         this.mConnectionId = connectionId;
+        this.mstream = stream;
         //add a listener for each type of signal to avoid breaking the interoperability
         this.mSession.addSignalListener(Mode.Pen.toString(), this);
         this.mSession.addSignalListener(Mode.Text.toString(), this);
         this.mSession.addSignalListener(Mode.Undo.toString(), this);
         this.mSession.addSignalListener(Mode.Clear.toString(), this);
 
-        this.mstream = stream
+        
 
         this.isScreenSharing = isScreenSharing;
 

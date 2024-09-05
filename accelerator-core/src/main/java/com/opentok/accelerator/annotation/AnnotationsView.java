@@ -615,7 +615,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             // else {
             //     jsonObject.put("id", mSession.getConnection().getConnectionId());
             // }
-            // changes done by abhishek
+            // changes done by abhishek 
             jsonObject.put("id", mConnectionId);
             jsonObject.put("fromId", mConnectionId);
             jsonObject.put("fromX", x);

@@ -761,8 +761,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     localWidth = getDisplayWidth();
                 }
                 if (localHeight == 0) {
-                    localHeight = getDisplayHeight();
+                    localHeight = getDisplayHeight() - mExtraHeight;
                 }
+
+                Log.d(LOG_TAG, "localWidth"+localWidth);
+                Log.d(LOG_TAG, "localHeight"+localHeight);
 
                 Map<String, Float> canvas = new HashMap<>();
                 canvas.put("width", localWidth);
@@ -773,6 +776,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 iCanvas.put("height", ((Number) json.get("canvasHeight")).floatValue());
 
                 float canvasRatio = canvas.get("width") / canvas.get("height");
+
+                Log.d(LOG_TAG, "canvasRatio"+canvasRatio);
 
                 if (canvasRatio < 0) {
                     scale = canvas.get("width") / iCanvas.get("width");
@@ -791,6 +796,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 float toY = ((Number) json.get("toY")).floatValue();
                 float toX = ((Number) json.get("toX")).floatValue();
 
+
+
+
                 if (platform.equals(SIGNAL_PLATFORM)) {
                     fromX = centerX - (scale * (iCenterX - ((Number) json.get("fromX")).floatValue()));
                     toX = centerX - (scale * (iCenterX - ((Number) json.get("toX")).floatValue()));
@@ -800,6 +808,12 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 }
                 fromY = fromY - getActionBarHeight();
                 toY = toY - getActionBarHeight();
+
+                Log.d(LOG_TAG, "fromY"+fromY);
+                Log.d(LOG_TAG, "toY"+toY);
+
+                Log.d(LOG_TAG, "fromX"+fromX);
+                Log.d(LOG_TAG, "toX"+toX);
 
                 if (mSignalMirrored) {
                     Log.i(LOG_TAG, "Signal is mirrored");

@@ -102,6 +102,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     private String mVideoHeight;
 
+    private int mExtraHeight;
+
 
     /**
      * Monitors state changes in the Annotations component.
@@ -175,7 +177,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
      * @param isScreenSharing
      * @throws Exception
      */
-    public AnnotationsView(Context context, @NonNull OTAcceleratorSession session, String partnerId,boolean isScreenSharing, String connectionId,String videoWidth,String videoHeight 
+    public AnnotationsView(Context context, @NonNull OTAcceleratorSession session, String partnerId,boolean isScreenSharing, String connectionId,String videoWidth,String videoHeight, String extraHeight 
     ) throws IllegalArgumentException {
         super(context);
 
@@ -189,6 +191,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         this.mConnectionId = connectionId;
         this.mVideoWidth = videoWidth;
         this.mVideoHeight = videoHeight;
+        this.mExtraHeight = Integer.valueOf(extraHeight);
         //add a listener for each type of signal to avoid breaking the interoperability
         this.mSession.addSignalListener(Mode.Pen.toString(), this);
         this.mSession.addSignalListener(Mode.Text.toString(), this);
@@ -625,7 +628,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("videoWidth", mVideoWidth);
             jsonObject.put("videoHeight", mVideoHeight);
             jsonObject.put("canvasWidth", this.width);
-            jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight());
+            jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight() - mExtraHeight);
             jsonObject.put("mirrored", true);
             jsonObject.put("text", text);
             jsonObject.put("font", "16px Arial"); //TODO: Fix font type
@@ -671,7 +674,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("videoWidth", mVideoWidth);
             jsonObject.put("videoHeight", mVideoHeight);
             jsonObject.put("canvasWidth", this.width);
-            jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight());
+            jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight() - mExtraHeight);
             jsonObject.put("mirrored", false);
             jsonObject.put("smoothed", false);
             jsonObject.put("startPoint", startPoint);

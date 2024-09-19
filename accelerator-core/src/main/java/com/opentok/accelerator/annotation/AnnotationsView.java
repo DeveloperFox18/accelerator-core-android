@@ -812,7 +812,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 Log.d(LOG_TAG, "penAnnotations toX 9:: "+toX);
 
 
-                if (platform.equals(SIGNAL_PLATFORM)) {
+                if (platform.equals(SIGNAL_PLATFORM) || platform.equals("web")) {
                     fromX = centerX - (scale * (iCenterX - ((Number) json.get("fromX")).floatValue()));
                     toX = centerX - (scale * (iCenterX - ((Number) json.get("toX")).floatValue()));
 

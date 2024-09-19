@@ -675,8 +675,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("videoHeight", mVideoHeight);
             jsonObject.put("canvasWidth", this.width);
             jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight() - mExtraHeight);
-            jsonObject.put("mirrored", false);
-            jsonObject.put("smoothed", false);
+            jsonObject.put("mirrored", true);
+            jsonObject.put("smoothed", true);
             jsonObject.put("startPoint", startPoint);
             jsonObject.put("endPoint", endPoint);
             jsonObject.put("platform", SIGNAL_PLATFORM);
@@ -764,8 +764,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     localHeight = getDisplayHeight() - mExtraHeight;
                 }
 
-                Log.d(LOG_TAG, "localWidth ${localWidth}");
-                Log.d(LOG_TAG, "localHeight ${localHeight}");
 
                 Map<String, Float> canvas = new HashMap<>();
                 canvas.put("width", localWidth);
@@ -777,7 +775,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                 float canvasRatio = canvas.get("width") / canvas.get("height");
 
-                Log.d(LOG_TAG, "canvasRatio ${canvasRatio}");
 
                 if (canvasRatio < 0) {
                     scale = canvas.get("width") / iCanvas.get("width");
@@ -808,12 +805,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 }
                 fromY = fromY - getActionBarHeight();
                 toY = toY - getActionBarHeight();
-
-                Log.d(LOG_TAG, "fromY ${fromY}");
-                Log.d(LOG_TAG, "toY ${toY}");
-
-                Log.d(LOG_TAG, "fromX ${fromX}");
-                Log.d(LOG_TAG, "toX ${toX}");
 
                 if (mSignalMirrored) {
                     Log.i(LOG_TAG, "Signal is mirrored");

@@ -614,12 +614,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         }
 
         try {
-            // if ( mRemoteConnId != null ){
-            //     jsonObject.put("id", mRemoteConnId);
-            // }
-            // else {
-            //     jsonObject.put("id", mSession.getConnection().getConnectionId());
-            // }
             jsonObject.put("id", mConnectionId);
             jsonObject.put("fromId", mConnectionId);
             jsonObject.put("fromX", x);
@@ -629,7 +623,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("videoHeight", mVideoHeight);
             jsonObject.put("canvasWidth", this.width);
             jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight() - mExtraHeight);
-            jsonObject.put("mirrored", true);
+            jsonObject.put("mirrored", false);
             jsonObject.put("text", text);
             jsonObject.put("font", "16px Arial"); //TODO: Fix font type
             jsonObject.put("platform", SIGNAL_PLATFORM);
@@ -656,13 +650,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             videoHeight = videoRenderer.getVideoHeight();
         }
         try {
-            // if ( mRemoteConnId != null ){
-            //     jsonObject.put("id", mRemoteConnId);
-            // }
-            // else {
-            //     jsonObject.put("id", mSession.getConnection().getConnectionId());
-            // }
-
             jsonObject.put("id", mConnectionId);
             jsonObject.put("fromId", mSession.getConnection().getConnectionId());
             jsonObject.put("fromX", mCurrentPath.getEndPoint().x);
@@ -675,8 +662,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("videoHeight", mVideoHeight);
             jsonObject.put("canvasWidth", this.width);
             jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight() - mExtraHeight);
-            jsonObject.put("mirrored", true);
-            jsonObject.put("smoothed", true);
+            jsonObject.put("mirrored", false);
+            jsonObject.put("smoothed", false);
             jsonObject.put("startPoint", startPoint);
             jsonObject.put("endPoint", endPoint);
             jsonObject.put("platform", SIGNAL_PLATFORM);
@@ -706,12 +693,13 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 }
 
                 String id = (String) json.get("id");
-                if (json.get("mirrored") instanceof Number) {
-                    Number value = (Number) json.get("mirrored");
-                    mSignalMirrored = value.intValue() == 1;
-                } else {
-                    mSignalMirrored = (boolean) json.get("mirrored");
-                }
+                mSignalMirrored = true;
+                // if (json.get("mirrored") instanceof Number) {
+                //     Number value = (Number) json.get("mirrored");
+                //     mSignalMirrored = value.intValue() == 1;
+                // } else {
+                //     mSignalMirrored = (boolean) json.get("mirrored");
+                // }
 
                 boolean initialPoint = false;
                 boolean secondPoint = false;
@@ -924,12 +912,13 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 JSONObject json = updates.getJSONObject(i);
 
                 String id = (String) json.get("id");
-                if (json.get("mirrored") instanceof Number) {
-                    Number value = (Number) json.get("mirrored");
-                    mSignalMirrored = value.intValue() == 1;
-                } else {
-                    mSignalMirrored = (boolean) json.get("mirrored");
-                }
+                mSignalMirrored = true;
+                // if (json.get("mirrored") instanceof Number) {
+                //     Number value = (Number) json.get("mirrored");
+                //     mSignalMirrored = value.intValue() == 1;
+                // } else {
+                //     mSignalMirrored = (boolean) json.get("mirrored");
+                // }
 
                 if (!json.isNull("color")) {
                     mCurrentColor = Color.parseColor(((String) json.get("color")).toLowerCase());

@@ -695,6 +695,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         try {
             JSONArray updates = new JSONArray(data);
 
+            Log.d(LOG_TAG, "penAnnotations "+updates.toString());
+
             for (int i = 0; i < updates.length(); i++) {
                 JSONObject json = updates.getJSONObject(i);
 
@@ -764,6 +766,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     localHeight = getDisplayHeight() - mExtraHeight;
                 }
 
+                Log.d(LOG_TAG, "penAnnotations "+localWidth);
+                Log.d(LOG_TAG, "penAnnotations "+localHeight);
+
 
                 Map<String, Float> canvas = new HashMap<>();
                 canvas.put("width", localWidth);
@@ -775,12 +780,15 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                 float canvasRatio = canvas.get("width") / canvas.get("height");
 
+                Log.d(LOG_TAG, "penAnnotations canvasRatio "+canvasRatio);
 
                 if (canvasRatio < 0) {
                     scale = canvas.get("width") / iCanvas.get("width");
                 } else {
                     scale = canvas.get("height") / iCanvas.get("height");
                 }
+
+                Log.d(LOG_TAG, "penAnnotations canvasRatio 1:: "+scale);
 
                 float centerX = canvas.get("width") / 2f;
                 float centerY = canvas.get("height") / 2f;
@@ -793,7 +801,15 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 float toY = ((Number) json.get("toY")).floatValue();
                 float toX = ((Number) json.get("toX")).floatValue();
 
+                Log.d(LOG_TAG, "penAnnotations centerX 2:: "+centerX);
+                Log.d(LOG_TAG, "penAnnotations centerY 3:: "+centerY);
+                Log.d(LOG_TAG, "penAnnotations iCenterX 4:: "+iCenterX);
+                Log.d(LOG_TAG, "penAnnotations iCenterY 5:: "+iCenterY);
 
+                Log.d(LOG_TAG, "penAnnotations fromX 6:: "+fromX);
+                Log.d(LOG_TAG, "penAnnotations fromY 7:: "+fromY);
+                Log.d(LOG_TAG, "penAnnotations toY 8:: "+toY);
+                Log.d(LOG_TAG, "penAnnotations toX 9:: "+toX);
 
 
                 if (platform.equals(SIGNAL_PLATFORM)) {
@@ -805,6 +821,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 }
                 fromY = fromY - getActionBarHeight();
                 toY = toY - getActionBarHeight();
+
+                Log.d(LOG_TAG, "penAnnotations fromX 10:: "+fromX);
+                Log.d(LOG_TAG, "penAnnotations fromY 11:: "+fromY);
+                Log.d(LOG_TAG, "penAnnotations toY 12:: "+toY);
+                Log.d(LOG_TAG, "penAnnotations toX 13::"+toX);
 
                 if (mSignalMirrored) {
                     Log.i(LOG_TAG, "Signal is mirrored");

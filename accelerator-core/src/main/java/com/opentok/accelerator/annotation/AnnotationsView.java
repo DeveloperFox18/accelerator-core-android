@@ -621,8 +621,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("color", String.format("#%06X", (0xFFFFFF & mCurrentColor)));
             jsonObject.put("videoWidth", mVideoWidth);
             jsonObject.put("videoHeight", mVideoHeight);
-            jsonObject.put("canvasWidth", this.width);
-            jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight() - mExtraHeight);
+            jsonObject.put("canvasWidth", mVideoWidth);
+            jsonObject.put("canvasHeight", mVideoHeight);
             jsonObject.put("mirrored", false);
             jsonObject.put("text", text);
             jsonObject.put("font", "16px Arial"); //TODO: Fix font type
@@ -660,8 +660,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("lineWidth", 2);
             jsonObject.put("videoWidth", mVideoWidth);
             jsonObject.put("videoHeight", mVideoHeight);
-            jsonObject.put("canvasWidth", this.width);
-            jsonObject.put("canvasHeight", getDisplayHeight() - getActionBarHeight() - mExtraHeight);
+            jsonObject.put("canvasWidth", mVideoWidth);
+            jsonObject.put("canvasHeight", mVideoHeight);
             jsonObject.put("mirrored", false);
             jsonObject.put("smoothed", false);
             jsonObject.put("startPoint", startPoint);

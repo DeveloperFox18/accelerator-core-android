@@ -751,7 +751,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     localWidth = getDisplayWidth();
                 }
                 if (localHeight == 0) {
-                    localHeight = getDisplayHeight();
+                    localHeight = getDisplayHeight() - mExtraHeight;
                     Log.d(LOG_TAG, "penAnnotations local Height "+localHeight);
                 }
 

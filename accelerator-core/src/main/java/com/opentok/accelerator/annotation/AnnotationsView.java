@@ -438,6 +438,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         return actionBarHeight;
     }
 
+    
+
     private int getDisplayContentHeight() {
         final WindowManager windowManager = (WindowManager) getContext()
                 .getSystemService(Context.WINDOW_SERVICE);
@@ -813,7 +815,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     toX = centerX - (scale * (iCenterX - ((Number) json.get("toX")).floatValue()));
 
                     fromY = centerY - (scale * (iCenterY - ((Number) json.get("fromY")).floatValue()));
+                    fromY = fromY - getStatusBarHeight();
                     toY = centerY - (scale * (iCenterY - ((Number) json.get("toY")).floatValue()));
+                    toY = toY - getStatusBarHeight();
                 }
                 fromY = fromY - getActionBarHeight();
                 toY = toY - getActionBarHeight();

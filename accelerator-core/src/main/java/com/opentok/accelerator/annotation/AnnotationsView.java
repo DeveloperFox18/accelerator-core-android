@@ -751,7 +751,12 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     localWidth = getDisplayWidth();
                 }
                 if (localHeight == 0) {
-                    localHeight =  (float) mVideoHeight;
+                    try {
+                        localHeight = Float.parseFloat(mVideoHeight);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input for mVideoHeight: " + mVideoHeight);
+                        localHeight = 0.0f; // default value
+                    }
                     Log.d(LOG_TAG, "penAnnotations local Height "+localHeight);
                 }
 

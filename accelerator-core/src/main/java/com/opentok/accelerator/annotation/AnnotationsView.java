@@ -752,12 +752,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 }
                 if (localHeight == 0) {
                     localHeight =  ((Number) mVideoHeight).floatValue();
-                    Log.d(LOG_TAG, "penAnnotations local Height "+localHeight);
                 }
 
-                
-
-
+            
                 Map<String, Float> canvas = new HashMap<>();
                 canvas.put("width", localWidth);
                 canvas.put("height", localHeight);

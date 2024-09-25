@@ -751,12 +751,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     localWidth = getDisplayWidth();
                 }
                 if (localHeight == 0) {
-                    localHeight =  mVideoHeight;//getDisplayHeight() - mExtraHeight;
+                    localHeight =  mVideoHeight;
                     Log.d(LOG_TAG, "penAnnotations local Height "+localHeight);
                 }
 
-                Log.d(LOG_TAG, "penAnnotations "+localWidth);
-                Log.d(LOG_TAG, "penAnnotations "+localHeight);
+                
 
 
                 Map<String, Float> canvas = new HashMap<>();
@@ -766,6 +765,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 Map<String, Float> iCanvas = new HashMap<>();
                 iCanvas.put("width", ((Number) json.get("canvasWidth")).floatValue());
                 iCanvas.put("height", ((Number) json.get("canvasHeight")).floatValue());
+
+                Log.d(LOG_TAG, "canvas Width 1 "+localWidth);
+                Log.d(LOG_TAG, "canvas height 1 "+localHeight);
+                Log.d(LOG_TAG, "canvas Width 2 "+((Number) json.get("canvasWidth")).floatValue());
+                Log.d(LOG_TAG, "canvas height 2 "+((Number) json.get("canvasHeight")).floatValue());
 
                 float canvasRatio = canvas.get("width") / canvas.get("height");
 

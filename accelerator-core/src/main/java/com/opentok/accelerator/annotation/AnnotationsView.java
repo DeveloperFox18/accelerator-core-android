@@ -925,12 +925,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                 String id = (String) json.get("id");
                 mSignalMirrored = true;
-                // if (json.get("mirrored") instanceof Number) {
-                //     Number value = (Number) json.get("mirrored");
-                //     mSignalMirrored = value.intValue() == 1;
-                // } else {
-                //     mSignalMirrored = (boolean) json.get("mirrored");
-                // }
 
                 if (!json.isNull("color")) {
                     mCurrentColor = Color.parseColor(((String) json.get("color")).toLowerCase());
@@ -977,7 +971,13 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     localWidth = getDisplayWidth();
                 }
                 if (localHeight == 0) {
-                    localHeight = getDisplayHeight();
+                    try {
+                        localHeight = Float.parseFloat(mVideoHeight);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input for mVideoHeight: " + mVideoHeight);
+                        localHeight = 0.0f; // default value
+                    }
+                    Log.d(LOG_TAG, "penAnnotations local Height "+localHeight);
                 }
 
                 Map<String, Float> canvas = new HashMap<>();
@@ -1012,6 +1012,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 EditText editText = new EditText(getContext());
                 editText.setVisibility(VISIBLE);
                 editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                editText.setBackgroundResource(R.drawable.input_text);
 
                 // Add whatever you want as size
                 int editTextHeight = 70;
@@ -1023,12 +1024,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 params.topMargin = (int) (textX);
                 params.leftMargin = (int) (textY);
                 this.addView(editText, params);
-                editText.setVisibility(VISIBLE);
                 editText.setSingleLine();
-                editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                 editText.requestFocus();
                 editText.setText(text);
                 editText.setTextSize(mTextSize);
+
 
                 createTextAnnotatable(editText, textX, textY);
                 mCurrentText.getEditText().setText(text.toString());
@@ -1126,6 +1126,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     EditText editText = new EditText(getContext());
                     editText.setVisibility(VISIBLE);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                    editText.setBackgroundResource(R.drawable.input_text);
 
                     // Add whatever you want as size
                     int editTextHeight = 70;

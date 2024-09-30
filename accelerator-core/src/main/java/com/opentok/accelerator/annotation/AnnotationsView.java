@@ -1007,6 +1007,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 float textX = centerX - (scale * (iCenterX - ((Number) json.get("fromX")).floatValue()));
                 float textY = centerY - (scale * (iCenterY - ((Number) json.get("fromY")).floatValue()));
 
+                textX = textX - getActionBarHeight();
                 textY = textY - getActionBarHeight();
 
                 EditText editText = new EditText(getContext());

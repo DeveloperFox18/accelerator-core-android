@@ -617,7 +617,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
         try {
             jsonObject.put("id", mConnectionId);
-            jsonObject.put("fromId", mConnectionId);
+            jsonObject.put("fromId", mSession.getConnection().getConnectionId());
             jsonObject.put("fromX", x);
             jsonObject.put("fromY", y);
             jsonObject.put("color", String.format("#%06X", (0xFFFFFF & mCurrentColor)));

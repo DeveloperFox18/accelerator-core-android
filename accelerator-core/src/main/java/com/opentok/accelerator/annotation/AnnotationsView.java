@@ -768,19 +768,16 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 canvas.put("height", localHeight);
 
                 Map<String, Float> iCanvas = new HashMap<>();
-                if (platform.equals(SIGNAL_PLATFORM)) {
-                    iCanvas.put("width", (json.get("canvasWidth")).floatValue());
-                    iCanvas.put("height", (json.get("canvasHeight")).floatValue());
+                if(platform.equals(SIGNAL_PLATFORM)) {
+                    iCanvas.put("width", Float.parseFloat(json.get("canvasWidth")));
+                    iCanvas.put("height", Float.parseFloat(json.get("canvasHeight")));
                 }else{
                     iCanvas.put("width", ((Number) json.get("canvasWidth")).floatValue());
                     iCanvas.put("height", ((Number) json.get("canvasHeight")).floatValue()); 
                 }
                 
 
-                Log.d(LOG_TAG, "canvas Width 1 "+localWidth);
-                Log.d(LOG_TAG, "canvas height 1 "+localHeight);
-                Log.d(LOG_TAG, "canvas Width 2 "+((Number) json.get("canvasWidth")).floatValue());
-                Log.d(LOG_TAG, "canvas height 2 "+((Number) json.get("canvasHeight")).floatValue());
+               
 
                 float canvasRatio = canvas.get("width") / canvas.get("height");
 
@@ -805,16 +802,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 float toY = ((Number) json.get("toY")).floatValue();
                 float toX = ((Number) json.get("toX")).floatValue();
 
-                Log.d(LOG_TAG, "penAnnotations centerX 2:: "+centerX);
-                Log.d(LOG_TAG, "penAnnotations centerY 3:: "+centerY);
-                Log.d(LOG_TAG, "penAnnotations iCenterX 4:: "+iCenterX);
-                Log.d(LOG_TAG, "penAnnotations iCenterY 5:: "+iCenterY);
-
-                Log.d(LOG_TAG, "penAnnotations fromX 6:: "+fromX);
-                Log.d(LOG_TAG, "penAnnotations fromY 7:: "+fromY);
-                Log.d(LOG_TAG, "penAnnotations toY 8:: "+toY);
-                Log.d(LOG_TAG, "penAnnotations toX 9:: "+toX);
-
+            
 
                 if (platform.equals(SIGNAL_PLATFORM) || platform.equals("web")) {
                     fromX = centerX - (scale * (iCenterX - ((Number) json.get("fromX")).floatValue()));
@@ -986,14 +974,19 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     Log.d(LOG_TAG, "penAnnotations local Height "+localHeight);
                 }
 
+                String platform = null;
+                if (!json.isNull("platform")) {
+                    platform = (String) json.get("platform");
+                }
+
                 Map<String, Float> canvas = new HashMap<>();
                 canvas.put("width", localWidth);
                 canvas.put("height", localHeight);
 
                 Map<String, Float> iCanvas = new HashMap<>();
-                if (platform.equals(SIGNAL_PLATFORM)) {
-                    iCanvas.put("width", (json.get("canvasWidth")).floatValue());
-                    iCanvas.put("height", (json.get("canvasHeight")).floatValue());
+                if(platform.equals(SIGNAL_PLATFORM)) {
+                    iCanvas.put("width", Float.parseFloat(json.get("canvasWidth")));
+                    iCanvas.put("height", Float.parseFloat(json.get("canvasHeight")));
                 }else{
                     iCanvas.put("width", ((Number) json.get("canvasWidth")).floatValue());
                     iCanvas.put("height", ((Number) json.get("canvasHeight")).floatValue()); 

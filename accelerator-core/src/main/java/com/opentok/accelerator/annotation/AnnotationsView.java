@@ -621,17 +621,10 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("fromX", x);
             jsonObject.put("fromY", y);
             jsonObject.put("color", String.format("#%06X", (0xFFFFFF & mCurrentColor)));
-            if (platform.equals(SIGNAL_PLATFORM)) {
-                jsonObject.put("videoWidth", NumberFormat.getInstance().parse(mVideoWidth));
-                jsonObject.put("videoHeight", NumberFormat.getInstance().parse(mVideoHeight));
-                jsonObject.put("canvasWidth", NumberFormat.getInstance().parse(mVideoWidth));
-                jsonObject.put("canvasHeight", NumberFormat.getInstance().parse(mVideoHeight));
-            }else{
-                jsonObject.put("videoWidth", mVideoWidth);
-                jsonObject.put("videoHeight", mVideoHeight);
-                jsonObject.put("canvasWidth", mVideoWidth);
-                jsonObject.put("canvasHeight", mVideoHeight);    
-            }
+            jsonObject.put("videoWidth", mVideoWidth);
+            jsonObject.put("videoHeight", mVideoHeight);
+            jsonObject.put("canvasWidth", mVideoWidth);
+            jsonObject.put("canvasHeight", mVideoHeight);
             jsonObject.put("mirrored", false);
             jsonObject.put("text", text);
             jsonObject.put("font", "16px Arial"); //TODO: Fix font type
@@ -667,18 +660,10 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("toY", y);
             jsonObject.put("color", String.format("#%06X", (0xFFFFFF & mCurrentColor)));
             jsonObject.put("lineWidth", 2);
-            if (platform.equals(SIGNAL_PLATFORM)) {
-                jsonObject.put("videoWidth", NumberFormat.getInstance().parse(mVideoWidth));
-                jsonObject.put("videoHeight", NumberFormat.getInstance().parse(mVideoHeight));
-                jsonObject.put("canvasWidth", NumberFormat.getInstance().parse(mVideoWidth));
-                jsonObject.put("canvasHeight", NumberFormat.getInstance().parse(mVideoHeight));
-            }else{
-                jsonObject.put("videoWidth", mVideoWidth);
-                jsonObject.put("videoHeight", mVideoHeight);
-                jsonObject.put("canvasWidth", mVideoWidth);
-                jsonObject.put("canvasHeight", mVideoHeight);    
-            }
-            
+            jsonObject.put("videoWidth", mVideoWidth);
+            jsonObject.put("videoHeight", mVideoHeight);
+            jsonObject.put("canvasWidth", mVideoWidth);
+            jsonObject.put("canvasHeight", mVideoHeight);
             jsonObject.put("mirrored", false);
             jsonObject.put("smoothed", false);
             jsonObject.put("startPoint", startPoint);
@@ -783,8 +768,14 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 canvas.put("height", localHeight);
 
                 Map<String, Float> iCanvas = new HashMap<>();
-                iCanvas.put("width", ((Number) json.get("canvasWidth")).floatValue());
-                iCanvas.put("height", ((Number) json.get("canvasHeight")).floatValue());
+                if (platform.equals(SIGNAL_PLATFORM)) {
+                    iCanvas.put("width", (json.get("canvasWidth")).floatValue());
+                    iCanvas.put("height", (json.get("canvasHeight")).floatValue());
+                }else{
+                    iCanvas.put("width", ((Number) json.get("canvasWidth")).floatValue());
+                    iCanvas.put("height", ((Number) json.get("canvasHeight")).floatValue()); 
+                }
+                
 
                 Log.d(LOG_TAG, "canvas Width 1 "+localWidth);
                 Log.d(LOG_TAG, "canvas height 1 "+localHeight);
@@ -1000,8 +991,13 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 canvas.put("height", localHeight);
 
                 Map<String, Float> iCanvas = new HashMap<>();
-                iCanvas.put("width", ((Number) json.get("canvasWidth")).floatValue());
-                iCanvas.put("height", ((Number) json.get("canvasHeight")).floatValue());
+                if (platform.equals(SIGNAL_PLATFORM)) {
+                    iCanvas.put("width", (json.get("canvasWidth")).floatValue());
+                    iCanvas.put("height", (json.get("canvasHeight")).floatValue());
+                }else{
+                    iCanvas.put("width", ((Number) json.get("canvasWidth")).floatValue());
+                    iCanvas.put("height", ((Number) json.get("canvasHeight")).floatValue()); 
+                }
                 float canvasRatio = canvas.get("width") / canvas.get("height");
 
                 if (canvasRatio < 0) {

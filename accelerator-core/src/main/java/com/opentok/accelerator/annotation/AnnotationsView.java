@@ -769,8 +769,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                 Map<String, Float> iCanvas = new HashMap<>();
                 if(platform.equals(SIGNAL_PLATFORM)) {
-                    iCanvas.put("width", Float.parseFloat(json.get("canvasWidth")));
-                    iCanvas.put("height", Float.parseFloat(json.get("canvasHeight")));
+                    iCanvas.put("width", Float.parseFloat((String) json.get("canvasWidth")));
+                    iCanvas.put("height", Float.parseFloat((String) json.get("canvasHeight")));
                 }else{
                     iCanvas.put("width", ((Number) json.get("canvasWidth")).floatValue());
                     iCanvas.put("height", ((Number) json.get("canvasHeight")).floatValue()); 
@@ -985,8 +985,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                 Map<String, Float> iCanvas = new HashMap<>();
                 if(platform.equals(SIGNAL_PLATFORM)) {
-                    iCanvas.put("width", Float.parseFloat(json.get("canvasWidth")));
-                    iCanvas.put("height", Float.parseFloat(json.get("canvasHeight")));
+                    iCanvas.put("width", Float.parseFloat((String) json.get("canvasWidth")));
+                    iCanvas.put("height", Float.parseFloat((String) json.get("canvasHeight")));
                 }else{
                     iCanvas.put("width", ((Number) json.get("canvasWidth")).floatValue());
                     iCanvas.put("height", ((Number) json.get("canvasHeight")).floatValue()); 

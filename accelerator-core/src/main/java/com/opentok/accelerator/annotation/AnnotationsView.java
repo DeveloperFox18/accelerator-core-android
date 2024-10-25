@@ -621,10 +621,17 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("fromX", x);
             jsonObject.put("fromY", y);
             jsonObject.put("color", String.format("#%06X", (0xFFFFFF & mCurrentColor)));
-            jsonObject.put("videoWidth", mVideoWidth);
-            jsonObject.put("videoHeight", mVideoHeight);
-            jsonObject.put("canvasWidth", mVideoWidth);
-            jsonObject.put("canvasHeight", mVideoHeight);
+            if (platform.equals(SIGNAL_PLATFORM)) {
+                jsonObject.put("videoWidth", NumberFormat.getInstance().parse(mVideoWidth));
+                jsonObject.put("videoHeight", NumberFormat.getInstance().parse(mVideoHeight));
+                jsonObject.put("canvasWidth", NumberFormat.getInstance().parse(mVideoWidth));
+                jsonObject.put("canvasHeight", NumberFormat.getInstance().parse(mVideoHeight));
+            }else{
+                jsonObject.put("videoWidth", mVideoWidth);
+                jsonObject.put("videoHeight", mVideoHeight);
+                jsonObject.put("canvasWidth", mVideoWidth);
+                jsonObject.put("canvasHeight", mVideoHeight);    
+            }
             jsonObject.put("mirrored", false);
             jsonObject.put("text", text);
             jsonObject.put("font", "16px Arial"); //TODO: Fix font type
@@ -660,10 +667,18 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("toY", y);
             jsonObject.put("color", String.format("#%06X", (0xFFFFFF & mCurrentColor)));
             jsonObject.put("lineWidth", 2);
-            jsonObject.put("videoWidth", mVideoWidth);
-            jsonObject.put("videoHeight", mVideoHeight);
-            jsonObject.put("canvasWidth", mVideoWidth);
-            jsonObject.put("canvasHeight", mVideoHeight);
+            if (platform.equals(SIGNAL_PLATFORM)) {
+                jsonObject.put("videoWidth", NumberFormat.getInstance().parse(mVideoWidth));
+                jsonObject.put("videoHeight", NumberFormat.getInstance().parse(mVideoHeight));
+                jsonObject.put("canvasWidth", NumberFormat.getInstance().parse(mVideoWidth));
+                jsonObject.put("canvasHeight", NumberFormat.getInstance().parse(mVideoHeight));
+            }else{
+                jsonObject.put("videoWidth", mVideoWidth);
+                jsonObject.put("videoHeight", mVideoHeight);
+                jsonObject.put("canvasWidth", mVideoWidth);
+                jsonObject.put("canvasHeight", mVideoHeight);    
+            }
+            
             jsonObject.put("mirrored", false);
             jsonObject.put("smoothed", false);
             jsonObject.put("startPoint", startPoint);

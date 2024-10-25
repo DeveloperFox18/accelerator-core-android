@@ -696,13 +696,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                 String id = (String) json.get("id");
                 mSignalMirrored = true;
-                // if (json.get("mirrored") instanceof Number) {
-                //     Number value = (Number) json.get("mirrored");
-                //     mSignalMirrored = value.intValue() == 1;
-                // } else {
-                //     mSignalMirrored = (boolean) json.get("mirrored");
-                // }
-
+               
                 boolean initialPoint = false;
                 boolean secondPoint = false;
                 boolean endPoint = false;
@@ -776,9 +770,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     iCanvas.put("height", ((Number) json.get("canvasHeight")).floatValue()); 
                 }
                 
-
-               
-
                 float canvasRatio = canvas.get("width") / canvas.get("height");
 
                 Log.d(LOG_TAG, "penAnnotations canvasRatio "+canvasRatio);
@@ -797,12 +788,15 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 float iCenterX = iCanvas.get("width") / 2f;
                 float iCenterY = iCanvas.get("height") / 2f;
 
+                Log.d(LOG_TAG, "penAnnotations canvasRatio CX:: "+centerX);
+                Log.d(LOG_TAG, "penAnnotations canvasRatio CY:: "+centerY);
+                Log.d(LOG_TAG, "penAnnotations canvasRatio ICX:: "+iCenterX);
+                Log.d(LOG_TAG, "penAnnotations canvasRatio ICY:: "+iCenterY);
+
                 float fromX = ((Number) json.get("fromX")).floatValue();
                 float fromY = ((Number) json.get("fromY")).floatValue();
                 float toY = ((Number) json.get("toY")).floatValue();
                 float toX = ((Number) json.get("toX")).floatValue();
-
-            
 
                 if (platform.equals(SIGNAL_PLATFORM) || platform.equals("web")) {
                     fromX = centerX - (scale * (iCenterX - ((Number) json.get("fromX")).floatValue()));
@@ -829,7 +823,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 mMirrored = true;
                 if (mMirrored) {
                     Log.i(LOG_TAG, "Feed is mirrored");
-                    // Revert (Double negative)
                     fromX = this.width - fromX;
                     toX = this.width - toX;
                 }

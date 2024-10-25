@@ -508,6 +508,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             while (i >= 0) {
                 Annotatable annotatable = mAnnotationsManager.getAnnotatableList().get(i);
                 if (annotatable.getCId().equals(cid)) {
+                    Log.d(LOG_TAG, "clearAll GET CID ---> : " + annotatable.getCId());
+                    Log.d(LOG_TAG, "clearAll: CID ---> : " + cid);
                     mAnnotationsManager.getAnnotatableList().remove(i);
                     jsonArray.put(annotatable.getCId());
                     i--;

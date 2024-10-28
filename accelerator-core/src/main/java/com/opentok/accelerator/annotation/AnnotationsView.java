@@ -501,7 +501,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         }
     }
 
-    private void clearAll(boolean incoming, String cid) {
+    private void clearAll_old(boolean incoming, String cid) {
         JSONArray jsonArray = new JSONArray();
         if (mAnnotationsManager.getAnnotatableList().size() > 0) {
             int matchCount = 0;
@@ -528,36 +528,36 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         }
     }
 
-    private void clearAll_older(boolean incoming, String cid) {
-        JSONArray jsonArray = new JSONArray();
+    private int userSideAnnotationCount(){
         int matchCount = 0;
         for (Annotatable annotatable : mAnnotationsManager.getAnnotatableList()) {
             if (annotatable.getCId().equals(cid)) {
                 matchCount++;
             }
         }
-        int i = matchCount - 1;
-    
-        if (matchCount > 0) {
-            while (i >= 0) {
-                for (int j = mAnnotationsManager.getAnnotatableList().size() - 1; j >= 0; j--) {
-                    Annotatable annotatable = mAnnotationsManager.getAnnotatableList().get(j);
-                    if (annotatable.getCId().equals(cid)) {
-                        Log.d(LOG_TAG, "clearAll GET CID ---> : " + annotatable.getCId());
-                        Log.d(LOG_TAG, "clearAll: CID ---> : " + cid);
-                        mAnnotationsManager.getAnnotatableList().remove(j);
-                        jsonArray.put(annotatable.getCId());
-                        i--;  // Decrement i only when a match is found
-                    }
-                    invalidate();
-                }
+        return matchCount;
+    }
+
+    private void clearAll(boolean incoming, String cid) {
+        JSONArray jsonArray = new JSONArray();
+        int i = userSideAnnotationCount() - 1;
+        Log.d(LOG_TAG, "clearAll: Total Size ---> : " + mAnnotationsManager.getAnnotatableList().size());
+        while(i >= 0){
+            Annotatable annotatable = mAnnotationsManager.getAnnotatableList().get(i);
+            if (annotatable.getCId().equals(cid)) {
+                Log.d(LOG_TAG, "clearAll: GET CID ---> : " + annotatable.getCId());
+                Log.d(LOG_TAG, "clearAll: CID ---> : " + annotatable.getData());
+                mAnnotationsManager.getAnnotatableList().remove(i);
+                jsonArray.put(annotatable.getCId());
+                i--;
             }
-    
-            Log.d(LOG_TAG, "Total matches found: " + matchCount);
-    
-            if (!incoming && !isScreenSharing) {
-                sendAnnotation(mode.toString(), null);
-            }
+            invalidate();
+        }
+
+        Log.d(LOG_TAG, "Total matches found: " + i);
+
+        if (!incoming && !isScreenSharing) {
+            sendAnnotation(mode.toString(), null);
         }
     }
 

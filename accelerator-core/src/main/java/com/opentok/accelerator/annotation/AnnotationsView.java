@@ -528,7 +528,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         }
     }
 
-    private int userSideAnnotationCount(){
+    private int userSideAnnotationCount(String cid){
         int matchCount = 0;
         for (Annotatable annotatable : mAnnotationsManager.getAnnotatableList()) {
             if (annotatable.getCId().equals(cid)) {
@@ -540,7 +540,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     private void clearAll(boolean incoming, String cid) {
         JSONArray jsonArray = new JSONArray();
-        int i = userSideAnnotationCount() - 1;
+        int i = userSideAnnotationCount(cid) - 1;
         Log.d(LOG_TAG, "clearAll: Total Size ---> : " + mAnnotationsManager.getAnnotatableList().size());
         while(i >= 0){
             Annotatable annotatable = mAnnotationsManager.getAnnotatableList().get(i);

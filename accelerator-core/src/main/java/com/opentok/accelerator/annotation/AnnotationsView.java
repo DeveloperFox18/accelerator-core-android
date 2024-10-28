@@ -550,8 +550,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 mAnnotationsManager.getAnnotatableList().remove(i);
                 jsonArray.put(annotatable.getCId());
                 i--;
+                invalidate();
             }
-            invalidate();
         }
 
         Log.d(LOG_TAG, "Total matches found: " + i);

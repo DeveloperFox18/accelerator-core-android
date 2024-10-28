@@ -551,6 +551,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 jsonArray.put(annotatable.getCId());
                 i--;
                 invalidate();
+                Log.d(LOG_TAG, "clearAll: if condition : ");
+            }else{
+                Log.d(LOG_TAG, "clearAll: CID else condition : ");
             }
         }
 

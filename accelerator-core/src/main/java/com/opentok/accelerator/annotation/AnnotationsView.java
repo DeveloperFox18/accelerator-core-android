@@ -501,10 +501,16 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         }
     }
 
-    private void clearAll_old(boolean incoming, String cid) {
+    private void clearAll(boolean incoming, String cid) {
         JSONArray jsonArray = new JSONArray();
         if (mAnnotationsManager.getAnnotatableList().size() > 0) {
-            int i = mAnnotationsManager.getAnnotatableList().size() - 1;
+            int matchCount = 0;
+            for (Annotatable annotatable : mAnnotationsManager.getAnnotatableList()) {
+                if (annotatable.getCId().equals(cid)) {
+                    matchCount++;
+                }
+            }
+            int i = matchCount - 1;
             while (i >= 0) {
                 Annotatable annotatable = mAnnotationsManager.getAnnotatableList().get(i);
                 if (annotatable.getCId().equals(cid)) {
@@ -522,7 +528,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         }
     }
 
-    private void clearAll(boolean incoming, String cid) {
+    private void clearAll_older(boolean incoming, String cid) {
         JSONArray jsonArray = new JSONArray();
         int matchCount = 0;
         for (Annotatable annotatable : mAnnotationsManager.getAnnotatableList()) {

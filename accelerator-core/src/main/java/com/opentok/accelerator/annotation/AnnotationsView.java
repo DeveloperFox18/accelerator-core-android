@@ -501,7 +501,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         }
     }
 
-    private void clearAll(boolean incoming, String cid) {
+    private void clearAll_old(boolean incoming, String cid) {
         JSONArray jsonArray = new JSONArray();
         if (mAnnotationsManager.getAnnotatableList().size() > 0) {
             int i = mAnnotationsManager.getAnnotatableList().size() - 1;
@@ -516,6 +516,39 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 }
                 invalidate();
             }
+            if (!incoming && !isScreenSharing) {
+                sendAnnotation(mode.toString(), null);
+            }
+        }
+    }
+
+    private void clearAll(boolean incoming, String cid) {
+        JSONArray jsonArray = new JSONArray();
+        int matchCount = 0;
+        for (Annotatable annotatable : mAnnotationsManager.getAnnotatableList()) {
+            if (annotatable.getCId().equals(cid)) {
+                matchCount++;
+            }
+        }
+        int i = matchCount - 1;
+    
+        if (matchCount > 0) {
+            while (i >= 0) {
+                for (int j = mAnnotationsManager.getAnnotatableList().size() - 1; j >= 0; j--) {
+                    Annotatable annotatable = mAnnotationsManager.getAnnotatableList().get(j);
+                    if (annotatable.getCId().equals(cid)) {
+                        Log.d(LOG_TAG, "clearAll GET CID ---> : " + annotatable.getCId());
+                        Log.d(LOG_TAG, "clearAll: CID ---> : " + cid);
+                        mAnnotationsManager.getAnnotatableList().remove(j);
+                        jsonArray.put(annotatable.getCId());
+                        i--;  // Decrement i only when a match is found
+                    }
+                    invalidate();
+                }
+            }
+    
+            Log.d(LOG_TAG, "Total matches found: " + matchCount);
+    
             if (!incoming && !isScreenSharing) {
                 sendAnnotation(mode.toString(), null);
             }

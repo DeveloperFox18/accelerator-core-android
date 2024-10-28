@@ -540,11 +540,12 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     private void clearAll(boolean incoming, String cid) {
         JSONArray jsonArray = new JSONArray();
-        int i = userSideAnnotationCount(cid,mAnnotationsManager) - 1;
+        int i = userSideAnnotationCount(cid,mAnnotationsManager);
         Log.d(LOG_TAG, "clearAll: Total Size ---> : " + mAnnotationsManager.getAnnotatableList().size());
         Log.d(LOG_TAG, "clearAll: value of i ---> : " + i);
-        while(i >= 0){
+        while(i > 0){
             Annotatable annotatable = mAnnotationsManager.getAnnotatableList().get(i);
+            Log.d(LOG_TAG,"annotatable.getCId() "+annotatable.getCId()+ " CID  -> "+cid);
             if (annotatable.getCId().equals(cid)) {
                 Log.d(LOG_TAG, "clearAll: GET CID ---> : " + annotatable.getCId());
                 Log.d(LOG_TAG, "clearAll: CID ---> : " + annotatable.getData());

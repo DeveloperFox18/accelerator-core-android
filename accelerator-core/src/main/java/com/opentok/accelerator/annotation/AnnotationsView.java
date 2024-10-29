@@ -514,7 +514,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 if (annotatable.getCId().equals(cid)) {
                     mAnnotationsManager.getAnnotatableList().remove(i);
                     jsonArray.put(annotatable.getCId());
-                    
+                    i--;
                 }else{
                     i--;
                 }

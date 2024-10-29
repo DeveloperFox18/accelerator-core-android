@@ -30,7 +30,6 @@ import com.tokbox.android.logging.OTKAnalyticsData;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.List;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -504,8 +503,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
     private void clearAll(boolean incoming, String cid) {
         JSONArray jsonArray = new JSONArray();
         if (mAnnotationsManager.getAnnotatableList().size() > 0) {
-            List<Annotatable> annotatableList = mAnnotationsManager.getAnnotatableList();
-            for (Annotatable item : annotatableList) {
+            for (Annotatable item : mAnnotationsManager.getAnnotatableList()) {
                 Log.d(LOG_TAG, "clearAll: value of CID ---> : " + item.getCId());
             }
             int i = mAnnotationsManager.getAnnotatableList().size() - 1;

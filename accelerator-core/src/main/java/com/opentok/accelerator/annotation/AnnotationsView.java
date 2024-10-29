@@ -1309,6 +1309,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     addLogEvent(OpenTokConfig.LOG_ACTION_DONE, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     mode = Mode.Clear;
                     clearAll(false, mSession.getConnection().getConnectionId());
+                    //AnnotationsView.this.setVisibility(GONE);
                     mListener.onAnnotationsDone();
                     addLogEvent(OpenTokConfig.LOG_ACTION_DONE, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }

@@ -1163,82 +1163,16 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 if (mode == Mode.Text) {
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     final String myString;
-
                     mAnnotationsActive = true;
-
-                    EditText editText = new EditText(getContext());
-                    editText.setVisibility(VISIBLE);
-                    editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                    editText.setBackgroundResource(R.drawable.input_text);
-
-                    // Add whatever you want as size
-                    int editTextHeight = 70;
-                    int editTextWidth = 200;
-
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(editTextWidth, editTextHeight);
-
-                    //You could adjust the position
-                    params.topMargin = (int) (event.getRawY());
-                    params.leftMargin = (int) (event.getRawX());
-                    editText.setVisibility(VISIBLE);
-                    editText.setSingleLine();
+                    EditText editText = new EditText(this);
+                    RelativeLayout.LayoutParams editTextParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    editText.setLayoutParams(editTextParams);
+                    editText.setInputType(InputType.TYPE_CLASS_TEXT);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
                     editText.setTextSize(mTextSize);
-
-                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-
                     createTextAnnotatable(editText, x, y);
-
-                    editText.addTextChangedListener(new TextWatcher() {
-
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before,
-                                                  int count) {
-                            drawText();
-                        }
-
-                        @Override
-                        public void afterTextChanged(Editable s) {
-                            // TODO Auto-generated method stub
-                        }
-
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count,
-                                                      int after) {
-                            // TODO Auto-generated method stub
-                        }
-
-                    });
-
-                    editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                        @Override
-                        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                                sendAnnotation(mode.toString(), buildSignalFromText(x, y, mCurrentText.getEditText().getText().toString(), false, true));
-
-                                //Create annotatable text and add it to the canvas
-                                mAnnotationsActive = false;
-
-                                try {
-                                    addAnnotatable(mSession.getConnection().getConnectionId());
-
-                                } catch (Exception e) {
-                                    Log.e(LOG_TAG, e.toString());
-                                }
-
-                                mCurrentText = null;
-                                invalidate();
-                                return true;
-                            }
-                            return false;
-                        }
-                    });
-                    //this code add via abhishek
-                    this.addView(editText, params);
+                    this.addView(editText);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }

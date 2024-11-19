@@ -1,5 +1,5 @@
 package com.opentok.accelerator.annotation;
-
+import android.text.InputType;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -1164,7 +1164,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     final String myString;
                     mAnnotationsActive = true;
-                    EditText editText = new EditText(this);
+                    EditText editText = new EditText(getContext());
                     RelativeLayout.LayoutParams editTextParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
                     editText.setLayoutParams(editTextParams);
                     editText.setInputType(InputType.TYPE_CLASS_TEXT);

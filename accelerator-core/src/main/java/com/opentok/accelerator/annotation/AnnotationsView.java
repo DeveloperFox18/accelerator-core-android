@@ -1172,7 +1172,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     EditText editText = new EditText(getContext());
                     editText.setVisibility(VISIBLE);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                    editText.setBackgroundResource(R.drawable.input_text);
                     editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, getResources().getDisplayMetrics()));
                     editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics()));
                     // Add whatever you want as size
@@ -1194,6 +1193,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
                     createTextAnnotatable(editText, x, y);
+
+                    editText.setBackgroundResource(R.drawable.input_text);
 
                     editText.addTextChangedListener(new TextWatcher() {
 

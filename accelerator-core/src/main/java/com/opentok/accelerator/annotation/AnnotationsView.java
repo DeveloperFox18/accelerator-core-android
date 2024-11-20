@@ -1262,6 +1262,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 Paint borderPaint = new Paint();
                 borderPaint.setStyle(Paint.Style.STROKE);
                 borderPaint.setStrokeWidth(5);
+                borderPaint.setColor(R.color.primary);
+                Log.d("AnnotationView"," Setting color");
 
                 Rect result = new Rect();
                 mCurrentPaint.getTextBounds(text, 0, text.length(), result);

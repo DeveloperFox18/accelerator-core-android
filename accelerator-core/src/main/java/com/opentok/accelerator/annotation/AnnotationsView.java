@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.*;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextPaint;
@@ -1172,6 +1173,13 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.requestFocus();
                     editText.setTextSize(mTextSize);
                     createTextAnnotatable(editText, x, y);
+                    GradientDrawable drawable = new GradientDrawable();
+                    drawable.setShape(GradientDrawable.RECTANGLE);
+                    drawable.setColor(Color.parseColor("#FFFFFF")); // Background color
+                    drawable.setStroke(4, Color.parseColor("#FF0000")); // Border thickness and color
+                    drawable.setCornerRadius(12f); // Corner radius in pixels
+                    editText.setBackground(drawable);
+
                     this.addView(editText);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }

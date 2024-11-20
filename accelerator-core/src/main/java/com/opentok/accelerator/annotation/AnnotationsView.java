@@ -1167,11 +1167,16 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     mAnnotationsActive = true;
                     EditText editText = new EditText(getContext());
                     RelativeLayout.LayoutParams editTextParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    editText.setVisibility(VISIBLE);
                     editText.setLayoutParams(editTextParams);
                     editText.setInputType(InputType.TYPE_CLASS_TEXT);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
                     editText.setTextSize(mTextSize);
+
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
                     createTextAnnotatable(editText, x, y);
                     GradientDrawable drawable = new GradientDrawable();
                     drawable.setShape(GradientDrawable.RECTANGLE);
@@ -1181,6 +1186,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.setBackground(drawable);
 
                     this.addView(editText);
+                    editText.bringToFront();
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }

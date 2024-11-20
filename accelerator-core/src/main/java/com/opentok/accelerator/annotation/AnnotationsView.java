@@ -1169,6 +1169,29 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                     mAnnotationsActive = true;
 
+                    TextView textView = new TextView(getContext());
+                    textView.setVisibility(View.GONE);
+                    textView.setText("");
+                    textView.setTextSize(16f);
+                    textView.setTextColor(Color.BLACK);
+                    // Set layout parameters
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT
+                    );
+
+                    layoutParams.topMargin = (int) (event.getRawY());
+                    layoutParams.leftMargin = (int) (event.getRawX());
+
+                    textView.setLayoutParams(layoutParams);
+                    // Set padding (left, top, right, bottom)
+                    textView.setPadding(10, 10, 10, 10);                    
+                    // Set minimum width
+                    textView.setMinWidth(150);
+
+                    textView.setBackgroundResource(R.drawable.input_text);
+
+
                     EditText editText = new EditText(getContext());
                     editText.setVisibility(VISIBLE);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -1243,7 +1266,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     });
                     //this code add via abhishek
-                    AnnotationsView.this.addView(editText, params);
+                    this.addView(textView);
+                    this.addView(editText, params);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }
@@ -1270,11 +1294,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                 if (text.length() > 10) {
                     String[] strings = text.split("(?<=\\G.{" + 10 + "})");
-
+                    borderPaint.set
                     float x = mCurrentText.getX();
                     float y = 340;
                     canvas.drawRect(x, y - result.height() - 20 + (strings.length * 50), x + result.width() + 20, y, borderPaint);
-
+                    canvas.drawText(" ", x, y, mCurrentPaint);
                     for (int i = 0; i < strings.length; i++) {
                         canvas.drawText(strings[i], x, y, mCurrentPaint);
                         y = y + 50;

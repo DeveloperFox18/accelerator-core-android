@@ -1188,6 +1188,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     textView.setPadding(10, 10, 10, 10);                    
                     // Set minimum width
                     textView.setMinWidth(150);
+                    // Set minimum height
+                    textView.setMinHeight(40);
 
                     textView.setBackgroundResource(R.drawable.input_text);
 

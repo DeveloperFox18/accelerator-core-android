@@ -1186,7 +1186,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.setBackground(drawable);
 
                     this.addView(editText);
-                    editText.bringToFront();
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }

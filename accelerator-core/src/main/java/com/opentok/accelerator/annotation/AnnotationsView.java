@@ -1164,9 +1164,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 if (mode == Mode.Text) {
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     final String myString;
-                    mAnnotationsActive = true;
-                    addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_ATTEMPT);
-                    final String myString;
 
                     mAnnotationsActive = true;
 

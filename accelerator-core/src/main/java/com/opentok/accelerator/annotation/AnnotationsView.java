@@ -1171,7 +1171,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.setVisibility(VISIBLE);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.setBackgroundResource(R.drawable.input_text);
-
+                    editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, getResources().getDisplayMetrics()));
+                    editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics()));
                     // Add whatever you want as size
                     int editTextHeight = 70;
                     int editTextWidth = 200;

@@ -1294,7 +1294,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                 if (text.length() > 10) {
                     String[] strings = text.split("(?<=\\G.{" + 10 + "})");
-                    borderPaint.set
                     float x = mCurrentText.getX();
                     float y = 340;
                     canvas.drawRect(x, y - result.height() - 20 + (strings.length * 50), x + result.width() + 20, y, borderPaint);

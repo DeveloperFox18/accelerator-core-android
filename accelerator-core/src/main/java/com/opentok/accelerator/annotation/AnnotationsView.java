@@ -1228,7 +1228,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     // Handle Done action on keyboard
                     editText.setOnEditorActionListener((v, actionId, keyEvent) -> {
                         if (actionId == EditorInfo.IME_ACTION_DONE) {
-                            InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                                 sendAnnotation(mode.toString(), buildSignalFromText(x, y, mCurrentText.getEditText().getText().toString(), false, true));
 

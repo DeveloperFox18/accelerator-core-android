@@ -18,7 +18,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import com.opentok.accelerator.R;
@@ -1166,50 +1165,40 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             } else {
                 if (mode == Mode.Text) {
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_ATTEMPT);
-                    mAnnotationsActive = true;
+                    final String myString;
 
-                    ViewGroup parent = (ViewGroup) this.getParent();
-                    if (parent == null) {
-                        throw new IllegalStateException("AnnotationsView must have a parent ViewGroup!");
-                    }
-        
+                    mAnnotationsActive = true;
+                
                     EditText editText = new EditText(getContext());
                     editText.setVisibility(VISIBLE);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, getResources().getDisplayMetrics()));
                     editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics()));
-                    editText.setSingleLine();
-                    editText.setTextSize(mTextSize);
-                    editText.setBackgroundResource(R.drawable.input_text);
-        
-                    // Adjust EditText position dynamically
-                    ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                    // Add whatever you want as size
+                    int editTextHeight = 70;
+                    int editTextWidth = 200;
 
-                    // Position EditText based on touch coordinates
-                    if (params instanceof RelativeLayout.LayoutParams) {
-                        ((RelativeLayout.LayoutParams) params).leftMargin = (int) x;
-                        ((RelativeLayout.LayoutParams) params).topMargin = (int) y;
-                    } else if (params instanceof FrameLayout.LayoutParams) {
-                        ((FrameLayout.LayoutParams) params).leftMargin = (int) x;
-                        ((FrameLayout.LayoutParams) params).topMargin = (int) y;
-                    }    
-                    // params.topMargin = (int) y; // Adjust Y position
-                    // params.leftMargin = (int) x; // Adjust X position
-                    editText.setLayoutParams(params);
-        
-                    // Add the EditText to the layout
-                    parent.addView(editText);
-        
-                    // Request focus and show keyboard
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(editTextWidth, editTextHeight);
+
+                    //You could adjust the position
+                    params.topMargin = (int) (event.getRawY());
+                    params.leftMargin = (int) (event.getRawX());
+                    editText.setVisibility(VISIBLE);
+                    editText.setSingleLine();
+                    editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
-                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-                
+                    editText.setTextSize(mTextSize);
+
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+                    createTextAnnotatable(editText, x, y);
+
                     editText.addTextChangedListener(new TextWatcher() {
 
                         @Override
-                        public void onTextChanged(CharSequence s, int start, int before,int count) {
+                        public void onTextChanged(CharSequence s, int start, int before,
+                                                  int count) {
                             drawText();
                         }
 
@@ -1219,15 +1208,18 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
 
                         @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count,int after) {
+                        public void beforeTextChanged(CharSequence s, int start, int count,
+                                                      int after) {
                             // TODO Auto-generated method stub
                         }
 
                     });
 
-                    // Handle Done action on keyboard
-                    editText.setOnEditorActionListener((v, actionId, keyEvent) -> {
-                        if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                        @Override
+                        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                                 sendAnnotation(mode.toString(), buildSignalFromText(x, y, mCurrentText.getEditText().getText().toString(), false, true));
 
@@ -1244,10 +1236,12 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 mCurrentText = null;
                                 invalidate();
                                 return true;
+                            }
+                            return false;
                         }
-                        return false;
                     });
-        
+                    //this code add via abhishek
+                    this.addView(editText, params);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }

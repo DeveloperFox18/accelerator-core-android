@@ -1181,8 +1181,10 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics()));
                     editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics()));
                     // Add whatever you want as size
-                 
-                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(50,150);
+                    int editTextHeight = 70;
+                    int editTextWidth = 200;
+
+                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(editTextWidth, editTextHeight);
 
                     //You could adjust the position
                     params.topMargin = (int) (event.getRawY());

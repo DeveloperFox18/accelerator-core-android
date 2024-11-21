@@ -18,6 +18,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import com.opentok.accelerator.R;
@@ -1167,7 +1168,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     final String myString;
                     mAnnotationsActive = true;
-
                     ViewGroup parent = (ViewGroup) this.getParent();
                     if (parent == null) {
                         throw new IllegalStateException("AnnotationsView must have a parent ViewGroup!");
@@ -1175,51 +1175,33 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         Log.d("ViewGroupCheck", "Parent is another type of ViewGroup: " + parent.getClass().getSimpleName());
 
                     }
-                
                     EditText editText = new EditText(getContext());
                     editText.setVisibility(VISIBLE);
-                    editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                    editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, getResources().getDisplayMetrics()));
-                    editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics()));
-                    
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-
+                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
                     //You could adjust the position
                     params.topMargin = (int) (event.getRawY());
                     params.leftMargin = (int) (event.getRawX());
-
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
                     editText.setTextSize(mTextSize);
                     editText.setLayoutParams(params);
-
                     parent.addView(editText);
-
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-
                     createTextAnnotatable(editText, x, y);
-
                     editText.addTextChangedListener(new TextWatcher() {
-
                         @Override
-                        public void onTextChanged(CharSequence s, int start, int before,
-                                                  int count) {
+                        public void onTextChanged(CharSequence s, int start, int before,int count) {
                             drawText();
                         }
-
                         @Override
                         public void afterTextChanged(Editable s) {
                             // TODO Auto-generated method stub
                         }
-
                         @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count,
-                                                      int after) {
+                        public void beforeTextChanged(CharSequence s, int start, int count,int after) {
                             // TODO Auto-generated method stub
                         }
-
                     });
 
                     editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -1229,17 +1211,13 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                                 sendAnnotation(mode.toString(), buildSignalFromText(x, y, mCurrentText.getEditText().getText().toString(), false, true));
-
                                 //Create annotatable text and add it to the canvas
                                 mAnnotationsActive = false;
-
                                 try {
                                     addAnnotatable(mSession.getConnection().getConnectionId());
-
                                 } catch (Exception e) {
                                     Log.e(LOG_TAG, e.toString());
                                 }
-
                                 mCurrentText = null;
                                 invalidate();
                                 return true;
@@ -1248,7 +1226,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     });
                     //this code add via abhishek
-                    
+                
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }

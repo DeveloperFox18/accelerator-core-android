@@ -1178,13 +1178,12 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     EditText editText = new EditText(getContext());
                     editText.setVisibility(VISIBLE);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                    editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, getResources().getDisplayMetrics()));
-                    editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics()));
+                    editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics()));
+                    editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics()));
                     // Add whatever you want as size
-                    int editTextHeight = 70;
-                    int editTextWidth = 200;
-
-                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(editTextWidth, editTextHeight);
+                 
+                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
 
                     //You could adjust the position
                     params.topMargin = (int) (event.getRawY());
@@ -1196,7 +1195,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.setSingleLine();
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
-                    editText.setTextSize(16f);
+                    editText.setTextSize(12f);
 
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);

@@ -1167,10 +1167,39 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 if (mode == Mode.Text) {
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     final String myString;
+
                     mAnnotationsActive = true;
+
+                    TextView textView = new TextView(getContext());
+                    textView.setVisibility(View.GONE);
+                    textView.setText("");
+                    textView.setTextSize(16f);
+                    textView.setTextColor(Color.BLACK);
+                    // Set layout parameters
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT
+                    );
+
+                    layoutParams.topMargin = (int) (event.getRawY());
+                    layoutParams.leftMargin = (int) (event.getRawX());
+
+                    textView.setLayoutParams(layoutParams);
+                    // Set padding (left, top, right, bottom)
+                    textView.setPadding(10, 10, 10, 10);                    
+                    // Set minimum width
+                    textView.setMinWidth(150);
+                    // Set minimum height
+                    textView.setMinHeight(40);
+
+                    textView.setBackgroundResource(R.drawable.input_text);
+
+
                     EditText editText = new EditText(getContext());
                     editText.setVisibility(VISIBLE);
-
+                    editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                    editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, getResources().getDisplayMetrics()));
+                    editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics()));
                     // Add whatever you want as size
                     int editTextHeight = 70;
                     int editTextWidth = 200;
@@ -1180,16 +1209,18 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     //You could adjust the position
                     params.topMargin = (int) (event.getRawY());
                     params.leftMargin = (int) (event.getRawX());
-                    
+                    editText.setVisibility(VISIBLE);
                     editText.setSingleLine();
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
                     editText.setTextSize(mTextSize);
-                    this.addView(editText, params);
+
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
                     createTextAnnotatable(editText, x, y);
+
+                    editText.setBackgroundResource(R.drawable.input_text);
 
                     editText.addTextChangedListener(new TextWatcher() {
 
@@ -1237,6 +1268,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             return false;
                         }
                     });
+                    //this code add via abhishek
+                    this.addView(textView);
+                    this.addView(editText, params);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }

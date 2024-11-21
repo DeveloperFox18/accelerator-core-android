@@ -18,6 +18,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import com.opentok.accelerator.R;

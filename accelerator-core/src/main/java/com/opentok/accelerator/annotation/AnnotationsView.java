@@ -1170,30 +1170,10 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                     mAnnotationsActive = true;
 
-                    TextView textView = new TextView(getContext());
-                    textView.setVisibility(View.GONE);
-                    textView.setText("");
-                    textView.setTextSize(16f);
-                    textView.setTextColor(Color.BLACK);
-                    // Set layout parameters
-                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT
-                    );
-
-                    layoutParams.topMargin = (int) (event.getRawY());
-                    layoutParams.leftMargin = (int) (event.getRawX());
-
-                    textView.setLayoutParams(layoutParams);
-                    // Set padding (left, top, right, bottom)
-                    textView.setPadding(10, 10, 10, 10);                    
-                    // Set minimum width
-                    textView.setMinWidth(150);
-                    // Set minimum height
-                    textView.setMinHeight(40);
-
-                    textView.setBackgroundResource(R.drawable.input_text);
-
+                    ViewGroup parent = (ViewGroup) this.getParent();
+                    if (parent == null) {
+                        throw new IllegalStateException("AnnotationsView must have a parent ViewGroup!");
+                    }
 
                     EditText editText = new EditText(getContext());
                     editText.setVisibility(VISIBLE);
@@ -1204,11 +1184,14 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     int editTextHeight = 70;
                     int editTextWidth = 200;
 
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(editTextWidth, editTextHeight);
+                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(editTextWidth, editTextHeight);
 
                     //You could adjust the position
                     params.topMargin = (int) (event.getRawY());
                     params.leftMargin = (int) (event.getRawX());
+
+                    editText.setLayoutParams(params);
+
                     editText.setVisibility(VISIBLE);
                     editText.setSingleLine();
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -1269,8 +1252,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     });
                     //this code add via abhishek
-                    this.addView(textView);
-                    this.addView(editText, params);
+                    this.addView(editText);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }

@@ -1181,6 +1181,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     params.topMargin = (int) (event.getRawY());
                     params.leftMargin = (int) (event.getRawX());
                     
+                    editText.setSingleLine();
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
                     editText.setTextSize(mTextSize);

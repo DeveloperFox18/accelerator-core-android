@@ -1166,28 +1166,35 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 if (mode == Mode.Text) {
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     final String myString;
-
                     mAnnotationsActive = true;
+
+                    ViewGroup parent = (ViewGroup) this.getParent();
+                    if (parent == null) {
+                        throw new IllegalStateException("AnnotationsView must have a parent ViewGroup!");
+                    }else{
+                        Log.d("ViewGroupCheck", "Parent is another type of ViewGroup: " + parent.getClass().getSimpleName());
+
+                    }
                 
                     EditText editText = new EditText(getContext());
                     editText.setVisibility(VISIBLE);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, getResources().getDisplayMetrics()));
                     editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics()));
-                    // Add whatever you want as size
-                    int editTextHeight = 70;
-                    int editTextWidth = 200;
-
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(editTextWidth, editTextHeight);
+                    
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
 
                     //You could adjust the position
                     params.topMargin = (int) (event.getRawY());
                     params.leftMargin = (int) (event.getRawX());
-                    editText.setVisibility(VISIBLE);
-                    editText.setSingleLine();
+
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
                     editText.setTextSize(mTextSize);
+                    editText.setLayoutParams(params);
+
+                    parent.addView(editText);
 
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
@@ -1241,7 +1248,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     });
                     //this code add via abhishek
-                    this.addView(editText, params);
+                    
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }
@@ -1271,7 +1278,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     float x = mCurrentText.getX();
                     float y = 340;
                     canvas.drawRect(x, y - result.height() - 20 + (strings.length * 50), x + result.width() + 20, y, borderPaint);
-                    canvas.drawText(" ", x, y, mCurrentPaint);
                     for (int i = 0; i < strings.length; i++) {
                         canvas.drawText(strings[i], x, y, mCurrentPaint);
                         y = y + 50;

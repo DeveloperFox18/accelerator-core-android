@@ -1175,10 +1175,12 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     int editTextHeight = 70;
                     int editTextWidth = 200;
 
-                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(editTextWidth, editTextHeight);
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(editTextWidth, editTextHeight);
+
                     //You could adjust the position
                     params.topMargin = (int) (event.getRawY());
                     params.leftMargin = (int) (event.getRawX());
+                    
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
                     editText.setTextSize(mTextSize);

@@ -599,7 +599,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         mCurrentPaint = new Paint();
         mCurrentPaint.setAntiAlias(true);
         mCurrentPaint.setColor(mCurrentColor);
-        mCurrentPaint.setTextSize(12f);
+        mCurrentPaint.setTextSize(14f);
         mCurrentText = new AnnotationsText(editText, x, y);
     }
 
@@ -1238,7 +1238,16 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 } catch (Exception e) {
                                     Log.e(LOG_TAG, e.toString());
                                 }
-                                parent.removeView(editText);
+                                
+                                // Attempt to remove EditText from parent
+                                ViewGroup parent = (ViewGroup) v.getParent();
+                                if (parent != null) {
+                                    Log.d("Debug", "Removing EditText from parent");
+                                    parent.post(() -> parent.removeView(v)); // Use post to ensure it's on the UI thread
+                                } else {
+                                    Log.e("Debug", "Parent is null, cannot remove EditText");
+                                }
+
                                 mCurrentText = null;
                                 invalidate();
                                 

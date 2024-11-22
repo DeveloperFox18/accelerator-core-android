@@ -599,7 +599,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         mCurrentPaint = new Paint();
         mCurrentPaint.setAntiAlias(true);
         mCurrentPaint.setColor(mCurrentColor);
-        mCurrentPaint.setTextSize(14f);
+        mCurrentPaint.setTextSize(mTextSize);
         mCurrentText = new AnnotationsText(editText, x, y);
     }
 
@@ -1208,7 +1208,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.addTextChangedListener(new TextWatcher() {
 
                         @Override
-                        public void onTextChanged(CharSequence s, int start, int before,int count) {
+                        public void onTextChanged(CharSequence s, int start, int before,
+                                                  int count) {
                             // drawText();
                         }
 
@@ -1218,7 +1219,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
 
                         @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count,int after) {
+                        public void beforeTextChanged(CharSequence s, int start, int count,
+                                                      int after) {
                             // TODO Auto-generated method stub
                         }
 
@@ -1238,19 +1240,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 } catch (Exception e) {
                                     Log.e(LOG_TAG, e.toString());
                                 }
-                                
-                                // Attempt to remove EditText from parent
-                                ViewGroup parent = (ViewGroup) v.getParent();
-                                if (parent != null) {
-                                    Log.d("Debug", "Removing EditText from parent");
-                                    parent.post(() -> parent.removeView(v)); // Use post to ensure it's on the UI thread
-                                } else {
-                                    Log.e("Debug", "Parent is null, cannot remove EditText");
-                                }
 
                                 mCurrentText = null;
                                 invalidate();
-                                
                                 return true;
                             }
                             return false;

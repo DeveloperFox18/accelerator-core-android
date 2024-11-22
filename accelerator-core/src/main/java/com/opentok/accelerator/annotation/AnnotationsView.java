@@ -1230,12 +1230,14 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         @Override
                         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                             Log.d("AnnotationView","Hello");
-                            Log.d("AnnotationView","${actionId}");
-                            Log.d("AnnotationView","${actionId == EditorInfo.IME_ACTION_DONE}");
+                            Log.d("AnnotationView",actionId);
+                            Log.d("AnnotationView",actionId == EditorInfo.IME_ACTION_DONE);
+                            Log.d("AnnotationView","mCurrentText "+mCurrentText);
                             if (actionId == EditorInfo.IME_ACTION_DONE) {
                                 
                                 InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                                if(mCurrentText != null)
                                 sendAnnotation(mode.toString(), buildSignalFromText(x, y, mCurrentText.getEditText().getText().toString(), false, true));
                                 
                                 //Create annotatable text and add it to the canvas
@@ -1246,12 +1248,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                     Log.e(LOG_TAG, e.toString());
                                 }
 
-                                editText.setVisibility(GONE);
-
-                                Log.d("AnnotationView","${editText}");
-                                Log.d("AnnotationView","${mCurrentText.getEditText}");
-
-                                
+                                editText.setVisibility(GONE);                               
                                 mCurrentText = null;
                                 invalidate();
                                 return true;

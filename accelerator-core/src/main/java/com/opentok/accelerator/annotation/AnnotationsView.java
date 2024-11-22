@@ -1248,7 +1248,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 Log.d("AnnotationView","${editText}");
                                 Log.d("AnnotationView","${mCurrentText.getEditText}");
 
-                                mCurrentText.setEditText() = null;
+                                
                                 mCurrentText = null;
                                 invalidate();
                                 return true;

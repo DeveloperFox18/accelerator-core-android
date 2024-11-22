@@ -1229,6 +1229,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                         @Override
                         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                            Log.d("AnnotationView","Hello");
+                            Log.d("AnnotationView","${actionId}");
+                            Log.d("AnnotationView","${actionId == EditorInfo.IME_ACTION_DONE}");
                             if (actionId == EditorInfo.IME_ACTION_DONE) {
                                 
                                 InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);

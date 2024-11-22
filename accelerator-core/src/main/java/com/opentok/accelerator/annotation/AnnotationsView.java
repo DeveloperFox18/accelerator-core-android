@@ -1191,7 +1191,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     params.leftMargin = (int) (event.getRawX());
 
                     editText.setLayoutParams(params);
-
+                    editText.setPadding(15, 0, 15, 0);
                     editText.setVisibility(VISIBLE);
                     editText.setSingleLine();
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -1230,10 +1230,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         @Override
                         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                                editText.setBackground(null);
+                                
                                 InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                                 sendAnnotation(mode.toString(), buildSignalFromText(x, y, mCurrentText.getEditText().getText().toString(), false, true));
+                                mCurrentText.getEditText().setVisibility(View.GONE);
                                 //Create annotatable text and add it to the canvas
                                 mAnnotationsActive = false;
                                 try {
@@ -1241,7 +1242,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 } catch (Exception e) {
                                     Log.e(LOG_TAG, e.toString());
                                 }
-
                                 mCurrentText = null;
                                 invalidate();
                                 return true;

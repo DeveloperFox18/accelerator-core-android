@@ -1234,7 +1234,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                                 sendAnnotation(mode.toString(), buildSignalFromText(x, y, mCurrentText.getEditText().getText().toString(), false, true));
-                                mCurrentText.getEditText().setVisibility(View.GONE);
+                                
                                 //Create annotatable text and add it to the canvas
                                 mAnnotationsActive = false;
                                 try {
@@ -1242,6 +1242,10 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 } catch (Exception e) {
                                     Log.e(LOG_TAG, e.toString());
                                 }
+
+                                mCurrentText.getEditText().setBackground(null);
+                                mCurrentText.getEditText().setVisibility(GONE);
+
                                 mCurrentText = null;
                                 invalidate();
                                 return true;

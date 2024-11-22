@@ -1233,7 +1233,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                                 sendAnnotation(mode.toString(), buildSignalFromText(x, y, mCurrentText.getEditText().getText().toString(), false, true));
-                                editText.setVisibility(GONE);
+                                editText.setVisibility(View.GONE);
+                                parent.requestLayout();
+                                parent.invalidate();
                                 //Create annotatable text and add it to the canvas
                                 mAnnotationsActive = false;
 

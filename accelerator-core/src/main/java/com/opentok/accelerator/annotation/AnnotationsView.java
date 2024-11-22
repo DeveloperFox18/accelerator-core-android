@@ -599,7 +599,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         mCurrentPaint = new Paint();
         mCurrentPaint.setAntiAlias(true);
         mCurrentPaint.setColor(mCurrentColor);
-        mCurrentPaint.setTextSize(mTextSize);
+        mCurrentPaint.setTextSize(12f);
         mCurrentText = new AnnotationsText(editText, x, y);
     }
 
@@ -1208,8 +1208,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.addTextChangedListener(new TextWatcher() {
 
                         @Override
-                        public void onTextChanged(CharSequence s, int start, int before,
-                                                  int count) {
+                        public void onTextChanged(CharSequence s, int start, int before,int count) {
                             // drawText();
                         }
 
@@ -1219,8 +1218,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
 
                         @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count,
-                                                      int after) {
+                        public void beforeTextChanged(CharSequence s, int start, int count,int after) {
                             // TODO Auto-generated method stub
                         }
 
@@ -1233,19 +1231,17 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                                 sendAnnotation(mode.toString(), buildSignalFromText(x, y, mCurrentText.getEditText().getText().toString(), false, true));
-                                editText.setBackground(null);
-
                                 //Create annotatable text and add it to the canvas
                                 mAnnotationsActive = false;
-
                                 try {
                                     addAnnotatable(mSession.getConnection().getConnectionId());
                                 } catch (Exception e) {
                                     Log.e(LOG_TAG, e.toString());
                                 }
-
+                                parent.removeView(editText);
                                 mCurrentText = null;
                                 invalidate();
+                                
                                 return true;
                             }
                             return false;

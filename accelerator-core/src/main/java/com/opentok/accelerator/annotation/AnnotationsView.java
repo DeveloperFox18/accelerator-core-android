@@ -1237,6 +1237,10 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 mAnnotationsActive = false;
                                 try {
                                     addAnnotatable(mSession.getConnection().getConnectionId());
+                                    parent.removeView(editText);
+                                    v.setVisibility(View.GONE);
+                                    editText = null;
+                                    
                                 } catch (Exception e) {
                                     Log.e(LOG_TAG, e.toString());
                                 }

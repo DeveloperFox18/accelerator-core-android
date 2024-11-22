@@ -1230,8 +1230,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         @Override
                         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                             Log.d("AnnotationView","Hello");
-                            Log.d("AnnotationView",actionId);
-                            Log.d("AnnotationView",actionId == EditorInfo.IME_ACTION_DONE);
+                            Log.d("AnnotationView","Action ID--->"+actionId);
+                            Log.d("AnnotationView","===>"+actionId == EditorInfo.IME_ACTION_DONE);
                             Log.d("AnnotationView","mCurrentText "+mCurrentText);
                             if (actionId == EditorInfo.IME_ACTION_DONE) {
                                 

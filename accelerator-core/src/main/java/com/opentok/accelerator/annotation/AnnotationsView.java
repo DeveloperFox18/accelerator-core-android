@@ -1243,8 +1243,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                     Log.e(LOG_TAG, e.toString());
                                 }
 
-                                mCurrentText.getEditText().setBackground(null);
-                                mCurrentText.getEditText().setVisibility(GONE);
+                                editText.setVisibility(GONE);
 
                                 Log.d("AnnotationView","${editText}");
                                 Log.d("AnnotationView","${mCurrentText.getEditText}");

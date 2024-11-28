@@ -128,7 +128,7 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/toolbar_height"
             android:gravity="center"
-            android:src="@drawable/ic_confirmation"
+            android:src="@drawable/delete_icon"
             android:background="@drawable/done_selector"
             android:clickable="true"
             android:visibility="gone" />

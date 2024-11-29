@@ -12,9 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import com.opentok.accelerator.R;
-/**
- * Defines the layout for the annotations toolbar
- */
+
 public class AnnotationsToolbar extends LinearLayout {
 
     private View rootView;
@@ -32,28 +30,12 @@ public class AnnotationsToolbar extends LinearLayout {
 
     private ActionsListener mActionsListener;
 
-    /**
-     * Monitors state changes in the AnnotationsToolbar.
-     */
     public interface ActionsListener {
-
-        /**
-         * Invoked when a new AnnotationsToolbar's item is clicked
-         *
-         * @param v        View: item
-         * @param selected Whether the item has been selected (<code>true</code>) or not (
-         *                 <code>false</code>).
-         */
         void onItemSelected(View v, boolean selected);
 
         void onColorSelected(int color);
     }
 
-    /**
-     * Constructor
-     *
-     * @param context Application context
-     */
     public AnnotationsToolbar(@NonNull Context context) {
         super(context);
 
@@ -65,12 +47,6 @@ public class AnnotationsToolbar extends LinearLayout {
         init();
     }
 
-    /**
-     * Constructor
-     *
-     * @param context Application context
-     * @param attrs   A collection of attributes
-     */
     public AnnotationsToolbar(@NonNull Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -82,11 +58,6 @@ public class AnnotationsToolbar extends LinearLayout {
         init();
     }
 
-    /**
-     * Sets AnnotationsToolbar listener
-     *
-     * @param listener: ActionsListener
-     */
     public void setActionListener(ActionsListener listener) {
         this.mActionsListener = listener;
     }
@@ -123,9 +94,19 @@ public class AnnotationsToolbar extends LinearLayout {
         mPickerColorBtn.setOnClickListener(mActionsClickListener);
         mDoneBtn.setOnClickListener(mActionsClickListener);
 
-        mDoneBtn.setSelected(false);
+        setDefaultSelection();
     }
 
+    private void setDefaultSelection() {
+
+        mFreeHandBtn.setSelected(true);
+
+        updateSelectedButtons(mFreeHandBtn);
+
+        if (mActionsListener != null) {
+            mActionsListener.onItemSelected(mFreeHandBtn, true);
+        }
+    }
 
     private OnClickListener colorClickListener = new OnClickListener() {
         @Override
@@ -171,9 +152,7 @@ public class AnnotationsToolbar extends LinearLayout {
                 mActionsListener.onColorSelected(color);
             }
         }
-
     };
-
 
     private OnClickListener mActionsClickListener = new OnClickListener() {
         @Override
@@ -202,36 +181,27 @@ public class AnnotationsToolbar extends LinearLayout {
                 mActionsListener.onItemSelected(v, v.isSelected());
             }
         }
-
     };
 
     private void updateColorPickerSelectedButtons(final View v, final int color) {
         final int mCount = mColorToolbar.getChildCount();
-
         mPickerColorBtn.setColorFilter(color);
-
         for (int i = 0; i < mCount; ++i) {
             if (mColorToolbar.getChildAt(i).getId() != v.getId() && mColorToolbar.getChildAt(i).isSelected()) {
                 mColorToolbar.getChildAt(i).setSelected(false);
             }
         }
-
     }
 
     private void updateSelectedButtons(final View v) {
         final int mCount = mMainToolbar.getChildCount();
-
         for (int i = 0; i < mCount; ++i) {
             if (mMainToolbar.getChildAt(i).getId() != v.getId() && mMainToolbar.getChildAt(i).isSelected()) {
                 mMainToolbar.getChildAt(i).setSelected(false);
             }
         }
-
     }
 
-    /**
-     * Restarts the toolbar actions
-     */
     public void restart() {
 
         int mCount = mMainToolbar.getChildCount();

@@ -78,6 +78,7 @@ public class AnnotationsToolbar extends LinearLayout {
         mPickerColorBtn.setOnClickListener(mActionsClickListener);
         mDoneBtn.setOnClickListener(mActionsClickListener);
         mDoneBtn.setSelected(false);
+        mFreeHandBtn.setSelected(true);
     }
 
 

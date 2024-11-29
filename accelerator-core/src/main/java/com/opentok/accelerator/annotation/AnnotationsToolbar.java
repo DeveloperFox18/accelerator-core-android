@@ -1,6 +1,5 @@
 package com.opentok.accelerator.annotation;
 
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Display;
@@ -14,7 +13,6 @@ import androidx.annotation.NonNull;
 import com.opentok.accelerator.R;
 
 public class AnnotationsToolbar extends LinearLayout {
-
     private View rootView;
     private ImageButton mFreeHandBtn;
     private ImageButton mEraseBtn;
@@ -22,39 +20,30 @@ public class AnnotationsToolbar extends LinearLayout {
     private ImageButton mScreenshotBtn;
     private ImageButton mPickerColorBtn;
     private ImageButton mDoneBtn;
-
     private Context mContext;
     private RelativeLayout mMainToolbar;
     private LinearLayout mColorToolbar;
     private HorizontalScrollView mColorScrollView;
-
     private ActionsListener mActionsListener;
 
     public interface ActionsListener {
         void onItemSelected(View v, boolean selected);
-
         void onColorSelected(int color);
     }
 
     public AnnotationsToolbar(@NonNull Context context) {
         super(context);
-
         mContext = context;
-
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
-
         init();
     }
 
     public AnnotationsToolbar(@NonNull Context context, AttributeSet attrs) {
         super(context, attrs);
-
         mContext = context;
-
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
-
         init();
     }
 
@@ -65,7 +54,6 @@ public class AnnotationsToolbar extends LinearLayout {
     private void init() {
         rootView = inflate(mContext, R.layout.annotations_toolbar, this);
         mMainToolbar = rootView.findViewById(R.id.main_toolbar);
-
         mColorToolbar = rootView.findViewById(R.id.color_toolbar);
         mColorScrollView = rootView.findViewById(R.id.color_view);
         mFreeHandBtn = mMainToolbar.findViewById(R.id.draw_freehand);
@@ -74,18 +62,14 @@ public class AnnotationsToolbar extends LinearLayout {
         mScreenshotBtn = mMainToolbar.findViewById(R.id.screenshot);
         mEraseBtn = mMainToolbar.findViewById(R.id.erase);
         mDoneBtn = mMainToolbar.findViewById(R.id.done);
-
         final int mCount = mColorToolbar.getChildCount();
-
         int[] colors = {R.color.picker_color_blue, R.color.picker_color_purple, R.color.picker_color_red, R.color.picker_color_orange,
                 R.color.picker_color_yellow, R.color.picker_color_green, R.color.picker_color_black, R.color.picker_color_gray, R.color.picker_color_white};
-
         // Loop through all of the children.
         for (int i = 0; i < mCount; ++i) {
             mColorToolbar.getChildAt(i).setOnClickListener(colorClickListener);
             ((ImageButton) mColorToolbar.getChildAt(i)).setColorFilter(getResources().getColor(colors[i]));
         }
-
         //Init actions
         mFreeHandBtn.setOnClickListener(mActionsClickListener);
         mTypeBtn.setOnClickListener(mActionsClickListener);
@@ -93,20 +77,9 @@ public class AnnotationsToolbar extends LinearLayout {
         mScreenshotBtn.setOnClickListener(mActionsClickListener);
         mPickerColorBtn.setOnClickListener(mActionsClickListener);
         mDoneBtn.setOnClickListener(mActionsClickListener);
-
-        setDefaultSelection();
+        mDoneBtn.setSelected(false);
     }
 
-    private void setDefaultSelection() {
-
-        mFreeHandBtn.setSelected(true);
-
-        updateSelectedButtons(mFreeHandBtn);
-
-        if (mActionsListener != null) {
-            mActionsListener.onItemSelected(mFreeHandBtn, true);
-        }
-    }
 
     private OnClickListener colorClickListener = new OnClickListener() {
         @Override
@@ -152,7 +125,9 @@ public class AnnotationsToolbar extends LinearLayout {
                 mActionsListener.onColorSelected(color);
             }
         }
+
     };
+
 
     private OnClickListener mActionsClickListener = new OnClickListener() {
         @Override
@@ -181,25 +156,31 @@ public class AnnotationsToolbar extends LinearLayout {
                 mActionsListener.onItemSelected(v, v.isSelected());
             }
         }
+
     };
 
     private void updateColorPickerSelectedButtons(final View v, final int color) {
         final int mCount = mColorToolbar.getChildCount();
+
         mPickerColorBtn.setColorFilter(color);
+
         for (int i = 0; i < mCount; ++i) {
             if (mColorToolbar.getChildAt(i).getId() != v.getId() && mColorToolbar.getChildAt(i).isSelected()) {
                 mColorToolbar.getChildAt(i).setSelected(false);
             }
         }
+
     }
 
     private void updateSelectedButtons(final View v) {
         final int mCount = mMainToolbar.getChildCount();
+
         for (int i = 0; i < mCount; ++i) {
             if (mMainToolbar.getChildAt(i).getId() != v.getId() && mMainToolbar.getChildAt(i).isSelected()) {
                 mMainToolbar.getChildAt(i).setSelected(false);
             }
         }
+
     }
 
     public void restart() {

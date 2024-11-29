@@ -51,15 +51,7 @@ public class AnnotationsToolbar extends LinearLayout {
         this.mActionsListener = listener;
     }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        if (mFreeHandBtn != null) {
-            mFreeHandBtn.performClick();
-        }
-    }
-
-    private void init() {
+       private void init() {
         rootView = inflate(mContext, R.layout.annotations_toolbar, this);
         mMainToolbar = rootView.findViewById(R.id.main_toolbar);
         mColorToolbar = rootView.findViewById(R.id.color_toolbar);
@@ -88,7 +80,7 @@ public class AnnotationsToolbar extends LinearLayout {
 
         
         mFreeHandBtn.setSelected(true);
-        mActionsClickListener.onClick(mFreeHandBtn);
+        mFreeHandBtn.performClick();
     }
 
 

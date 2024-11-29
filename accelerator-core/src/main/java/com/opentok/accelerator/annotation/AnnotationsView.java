@@ -323,8 +323,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         mAnnotationsManager = new AnnotationsManager();
         mCurrentColor = getResources().getColor(R.color.picker_color_orange);
         mSelectedColor = mCurrentColor;
-        this.setVisibility(View.GONE);
         mode = Mode.Pen;
+        // this.setVisibility(View.GONE);
         addLogEvent(OpenTokConfig.LOG_ACTION_INITIALIZE, OpenTokConfig.LOG_VARIATION_SUCCESS);
     }
 

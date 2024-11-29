@@ -77,7 +77,8 @@ public class AnnotationsToolbar extends LinearLayout {
         mScreenshotBtn.setOnClickListener(mActionsClickListener);
         mPickerColorBtn.setOnClickListener(mActionsClickListener);
         mDoneBtn.setOnClickListener(mActionsClickListener);
-        mDoneBtn.setSelected(false);
+
+        
         mFreeHandBtn.setSelected(true);
 
         mActionsClickListener.onClick(mFreeHandBtn);
@@ -203,7 +204,7 @@ public class AnnotationsToolbar extends LinearLayout {
         if (mActionsListener != null) {
             mActionsListener.onColorSelected(color);
         }
-        mDoneBtn.setVisibility(GONE);
+        mDoneBtn.setVisibility(VISIBLE);
         mFreeHandBtn.setSelected(true);
     }
 }

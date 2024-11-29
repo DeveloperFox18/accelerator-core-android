@@ -1247,6 +1247,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }
+        }else{
+            //this code add via abhishek
+            Log.d("AnnotationView","mode is null....");
         }
         return true;
     }

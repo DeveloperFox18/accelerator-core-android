@@ -1129,7 +1129,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 Log.d(LOG_TAG, "onTouchEvent--->1: " + mode);
                 addLogEvent(OpenTokConfig.LOG_ACTION_FREEHAND, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                 switch (event.getAction()) {
-                    Log.d(LOG_TAG, "onTouchEvent--->2: " + event.getAction());
                     case MotionEvent.ACTION_DOWN: {
                         addLogEvent(OpenTokConfig.LOG_ACTION_START_DRAWING, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                         mAnnotationsActive = true;

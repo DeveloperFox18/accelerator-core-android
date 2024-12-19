@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
         android:isScrollContainer="true"
-        android:visibility="gone"
+        android:visibility="visible"
         android:fillViewport="true"
         android:scrollbars="none"
         android:paddingBottom="5dp">
@@ -67,6 +67,7 @@
             android:id="@+id/picker_yellow"
             android:layout_width="@dimen/toolbar_height"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:layout_gravity="center_vertical"
             android:src="@drawable/color_picker"
             android:background="@drawable/selector"
@@ -79,6 +80,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:src="@drawable/color_picker"
+            android:visibility="gone"
             android:background="@drawable/selector"
             android:tint="@color/picker_color_green"
             android:clickable="true"/>
@@ -89,6 +91,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:src="@drawable/color_picker"
+            android:visibility="gone"
             android:background="@drawable/selector"
             android:tint="@color/picker_color_black"
             android:clickable="true"/>
@@ -99,6 +102,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:src="@drawable/color_picker"
+            android:visibility="gone"
             android:background="@drawable/selector"
             android:tint="@color/picker_color_gray"
             android:clickable="true"/>
@@ -107,6 +111,7 @@
             android:id="@+id/picker_white"
             android:layout_width="@dimen/toolbar_height"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:layout_gravity="center_vertical"
             android:src="@drawable/color_picker"
             android:background="@drawable/selector"
@@ -128,9 +133,10 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/toolbar_height"
             android:gravity="center"
-            android:src="@drawable/delete_icon"
-            android:background="@drawable/done_selector"
-            android:clickable="true" />
+            android:src="@drawable/ic_baseline_delete_24"
+            android:background="@drawable/selector"
+            android:clickable="true"
+            />
 
         <ImageButton
             android:id="@+id/draw_freehand"

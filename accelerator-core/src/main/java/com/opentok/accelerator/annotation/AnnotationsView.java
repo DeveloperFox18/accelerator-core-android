@@ -1262,6 +1262,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         if (mAnnotationsActive) {
             if (mCurrentText != null && mCurrentText.getEditText() != null && !mCurrentText.getEditText().getText().toString().isEmpty()) {
                 TextPaint textpaint = new TextPaint(mCurrentPaint);
+                textpaint.setStyle(Paint.Style.STROKE); // Ensure text is not filled
+
                 String text = mCurrentText.getEditText().getText().toString();
                 Paint borderPaint = new Paint();
                 borderPaint.setStyle(Paint.Style.STROKE);
@@ -1285,18 +1287,22 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     canvas.drawRect(mCurrentText.getX(), 340 - result.height() - 20, mCurrentText.getX() + result.width() + 20, 340, borderPaint);
                     canvas.drawText(mCurrentText.getEditText().getText().toString(), mCurrentText.getX(), 340, mCurrentPaint);
                 }
+                mCurrentPaint.setStyle(Paint.Style.STROKE);
             }
             if (mCurrentPath != null) {
+                mCurrentPaint.setStyle(Paint.Style.STROKE);
                 canvas.drawPath(mCurrentPath, mCurrentPaint);
             }
         }
 
         for (Annotatable drawing : mAnnotationsManager.getAnnotatableList()) {
             if (drawing.getType().equals(Annotatable.AnnotatableType.PATH)) {
+                drawing.getPaint().setStyle(Paint.Style.STROKE);
                 canvas.drawPath(drawing.getPath(), drawing.getPaint());
             }
 
             if (drawing.getType().equals(Annotatable.AnnotatableType.TEXT)) {
+                drawing.getPaint().setStyle(Paint.Style.STROKE);
                 canvas.drawText(drawing.getText().getEditText().getText().toString(), drawing.getText().x, drawing.getText().y, drawing.getPaint());
             }
         }

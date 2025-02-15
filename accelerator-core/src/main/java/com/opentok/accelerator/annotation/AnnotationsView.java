@@ -1302,7 +1302,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             }
 
             if (drawing.getType().equals(Annotatable.AnnotatableType.TEXT)) {
-                drawing.getPaint().setStyle(Paint.Style.STROKE);
+                drawing.getPaint().setStyle(Paint.Style.FILL);
                 canvas.drawText(drawing.getText().getEditText().getText().toString(), drawing.getText().x, drawing.getText().y, drawing.getPaint());
             }
         }

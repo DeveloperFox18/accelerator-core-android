@@ -1087,6 +1087,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 mAnnotationsActive = false;
                 addAnnotatable(connectionId);
                 mCurrentText = null;
+                editText.setBackgroundResource(R.drawable.input_text_update);
                 invalidate(); // Need this to finalize the drawing on the screen
             }
 

@@ -1184,7 +1184,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     int textViewWidth = 200;
                     FrameLayout.LayoutParams paramsTV = new FrameLayout.LayoutParams(textViewWidth, textViewHeight);
                     paramsTV.topMargin = (int) (event.getX());
-                    paramsTV.leftMargin = (int) (event.event.getY() + 30);
+                    paramsTV.leftMargin = (int) (event.getY() + 30);
 
 
 

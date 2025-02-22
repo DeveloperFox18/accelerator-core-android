@@ -1290,8 +1290,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     });
                     //this code add via abhishek
-                    parent.addView(editText);
-                    parent.addView(textView);
+                   // parent.addView(editText);
+                  //  parent.addView(textView);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }

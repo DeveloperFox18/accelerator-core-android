@@ -1264,18 +1264,18 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 }
                                 
 
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        ViewGroup parentET = (ViewGroup) editText.getParent();
-                                        if (parentET != null) {
-                                            parentET.removeView(editText);
-                                            Log.d(LOG_TAG, "Abhi Removed EditText");
-                                        }
-                                        invalidate();
-                                        requestLayout();
-                                    }
-                                }, 300);
+                                // new Handler().postDelayed(new Runnable() {
+                                //     @Override
+                                //     public void run() {
+                                //         ViewGroup parentET = (ViewGroup) editText.getParent();
+                                //         if (parentET != null) {
+                                //             parentET.removeView(editText);
+                                //             Log.d(LOG_TAG, "Abhi Removed EditText");
+                                //         }
+                                //         invalidate();
+                                //         requestLayout();
+                                //     }
+                                // }, 300);
                                 // Remove TextView first
                                     // ViewGroup parentTV = (ViewGroup) textView.getParent();
                                     // if (parentTV != null) {
@@ -1299,7 +1299,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         
                                 Log.d(LOG_TAG, "Abhi onEditorAction: " + mCurrentText.getEditText().getText().toString());                       
                                 mCurrentText = null;
-                                invalidate();
+                               
                                 return true;
                             }
                             return false;

@@ -1203,7 +1203,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
-                    createTextAnnotatable(editText, x, y);
+                    // createTextAnnotatable(editText, x, y);
 
                     editText.setBackgroundResource(R.drawable.input_text);
 
@@ -1246,12 +1246,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                     Log.e(LOG_TAG, e.toString());
                                 }
 
-                                ViewGroup parent = (ViewGroup) v.getParent();
-                                if (parent != null) {
-                                    parent.removeView(v);
-                                    Log.d(LOG_TAG, "Abhi Removed:--- ");  
-                                }
-
+                                parent.removeView(editText);
                         
                                 Log.d(LOG_TAG, "Abhi onEditorAction: " + mCurrentText.getEditText().getText().toString());                       
                                 mCurrentText = null;

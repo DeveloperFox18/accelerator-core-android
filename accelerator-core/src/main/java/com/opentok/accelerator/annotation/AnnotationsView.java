@@ -1179,12 +1179,15 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                     TextView textView = new TextView(getContext());
                     textView.setVisibility(VISIBLE);
-                    textView.setText("Text");
+                    textView.setText("Hello");
                     int textViewHeight = 70;
                     int textViewWidth = 200;
                     FrameLayout.LayoutParams paramsTV = new FrameLayout.LayoutParams(textViewWidth, textViewHeight);
                     paramsTV.topMargin = (int) (event.getX());
                     paramsTV.leftMargin = (int) (event.getY() + 30);
+                    textView.setLayoutParams(paramsTV);
+                    textView.setTextSize(12f);
+                    textView.setTextColor(mCurrentColor);
 
 
 

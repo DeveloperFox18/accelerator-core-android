@@ -1259,9 +1259,27 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 } catch (Exception e) {
                                     Log.e(LOG_TAG, e.toString());
                                 }
+                                
+                                // Remove TextView first
+                                    ViewGroup parentTV = (ViewGroup) textView.getParent();
+                                    if (parentTV != null) {
+                                        parentTV.removeView(textView);
+                                        Log.d(LOG_TAG, "Abhi Removed TextView");
+                                    }
 
+                                    // Remove EditText
+                                    ViewGroup parentET = (ViewGroup) editText.getParent();
+                                    if (parentET != null) {
+                                        parentET.removeView(editText);
+                                        Log.d(LOG_TAG, "Abhi Removed EditText");
+                                    }
+
+                                    // Ensure UI refresh
+                                    invalidate();
+                                    requestLayout();
+                                    Log.d(LOG_TAG, "Abhi Refreshed UI");
                                 // parent.removeView(editText);
-                                parent.removeView(textView);
+                                //parent.removeView(textView);
                         
                                 Log.d(LOG_TAG, "Abhi onEditorAction: " + mCurrentText.getEditText().getText().toString());                       
                                 mCurrentText = null;

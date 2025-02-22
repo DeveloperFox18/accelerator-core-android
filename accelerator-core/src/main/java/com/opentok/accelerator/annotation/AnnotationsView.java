@@ -1177,6 +1177,17 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         throw new IllegalStateException("AnnotationsView must have a parent ViewGroup!");
                     }
 
+                    TextView textView = new TextView(getContext());
+                    textView.setVisibility(VISIBLE);
+                    textView.setText("Text");
+                    int textViewHeight = 70;
+                    int textViewWidth = 200;
+                    FrameLayout.LayoutParams paramsTV = new FrameLayout.LayoutParams(textViewWidth, textViewHeight);
+                    params.topMargin = (int) (event.getX());
+                    params.leftMargin = (int) (event.event.getY() + 30);
+
+
+
                     EditText editText = new EditText(getContext());
                     editText.setVisibility(VISIBLE);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -1246,7 +1257,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                     Log.e(LOG_TAG, e.toString());
                                 }
 
-                                parent.removeView(editText);
+                                // parent.removeView(editText);
+                                parent.removeView(textView);
                         
                                 Log.d(LOG_TAG, "Abhi onEditorAction: " + mCurrentText.getEditText().getText().toString());                       
                                 mCurrentText = null;
@@ -1258,6 +1270,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     });
                     //this code add via abhishek
                     parent.addView(editText);
+                    parent.addView(textView);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }

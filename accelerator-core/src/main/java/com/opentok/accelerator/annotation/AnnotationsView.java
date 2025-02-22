@@ -1264,18 +1264,19 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 }
                                 
 
-                                // new Handler().postDelayed(new Runnable() {
-                                //     @Override
-                                //     public void run() {
-                                //         ViewGroup parentET = (ViewGroup) editText.getParent();
-                                //         if (parentET != null) {
-                                //             parentET.removeView(editText);
-                                //             Log.d(LOG_TAG, "Abhi Removed EditText");
-                                //         }
-                                //         invalidate();
-                                //         requestLayout();
-                                //     }
-                                // }, 300);
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ViewGroup parentET = (ViewGroup) editText.getParent();
+                                        if (parentET != null) {
+                                            editText.setBackgroundResource(R.drawable.input_text_update);
+                                            parentET.removeView(editText);
+                                            Log.d(LOG_TAG, "Abhi Removed EditText");
+                                        }
+                                        invalidate();
+                                        requestLayout();
+                                    }
+                                }, 300);
                                 // Remove TextView first
                                     // ViewGroup parentTV = (ViewGroup) textView.getParent();
                                     // if (parentTV != null) {

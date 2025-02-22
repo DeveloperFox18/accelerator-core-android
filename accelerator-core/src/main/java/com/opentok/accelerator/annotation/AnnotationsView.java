@@ -1203,7 +1203,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
-                    // createTextAnnotatable(editText, x, y);
+                    createTextAnnotatable(editText, x, y);
 
                     editText.setBackgroundResource(R.drawable.input_text);
 

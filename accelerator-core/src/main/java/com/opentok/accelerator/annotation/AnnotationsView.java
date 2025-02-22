@@ -1249,7 +1249,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 ViewGroup parent = (ViewGroup) v.getParent();
                                 if (parent != null) {
                                     parent.removeView(v);
-                                    Log.d(LOG_TAG, "Abhi Removed: ");  
+                                    Log.d(LOG_TAG, "Abhi Removed:--- ");  
                                 }
 
                         

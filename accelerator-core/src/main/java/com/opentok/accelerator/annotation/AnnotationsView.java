@@ -1246,15 +1246,16 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                     Log.e(LOG_TAG, e.toString());
                                 }
 
-                                editText.setBackgroundResource(0);
-
-                                parent = (ViewGroup) editText.getParent();
-                                if (parent != null) {
-                                    parent.removeView(editText);
-                                }
-                        
-                                // **Fix: Clear focus**
-                                editText.clearFocus();
+                                v.post(() -> {
+                                    editText.setBackground(null); // OR editText.setBackgroundResource(0);
+                                    
+                                    ViewGroup parent = (ViewGroup) editText.getParent();
+                                    if (parent != null) {
+                                        parent.removeView(editText);
+                                    }
+                                    
+                                    editText.clearFocus();
+                                });
                         
                                 Log.d(LOG_TAG, "Abhi onEditorAction: " + mCurrentText.getEditText().getText().toString());                       
                                 mCurrentText = null;

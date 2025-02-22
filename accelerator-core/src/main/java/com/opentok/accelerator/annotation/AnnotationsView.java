@@ -1222,7 +1222,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                     createTextAnnotatable(editText, x, y);
 
-                    editText.setBackgroundResource(R.drawable.input_text);
+                    editText.setBackgroundResource(R.drawable.input_text_update);
 
                     editText.addTextChangedListener(new TextWatcher() {
 
@@ -1269,7 +1269,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                     public void run() {
                                         ViewGroup parentET = (ViewGroup) editText.getParent();
                                         if (parentET != null) {
-                                            editText.setBackgroundResource(R.drawable.input_text_update);
+                                            editText.setBackgroundResource(R.drawable.input_text);
                                             parentET.removeView(editText);
                                             Log.d(LOG_TAG, "Abhi Removed EditText");
                                         }

@@ -694,6 +694,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
     private String buildSignalFromPoint(float x, float y, boolean startPoint, boolean endPoint) {
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
+        UUID uuid = UUID.randomUUID();
         boolean mirrored = false;
 
         int videoWidth = 0;
@@ -723,6 +724,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             jsonObject.put("endPoint", endPoint);
             jsonObject.put("platform", SIGNAL_PLATFORM);
             jsonObject.put("mode", mode);
+            jsonObject.put("guid", uuid.toString());
             jsonArray.put(jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -851,7 +853,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 float toY = ((Number) json.get("toY")).floatValue();
                 float toX = ((Number) json.get("toX")).floatValue();
 
-                if (platform.equals(SIGNAL_PLATFORM) || platform.equals("web")) {
+                if (platform.equals(SIGNAL_PLATFORM) || platform.equals("web") || platform.equals("ios")) {
                     fromX = centerX - (scale * (iCenterX - ((Number) json.get("fromX")).floatValue()));
                     toX = centerX - (scale * (iCenterX - ((Number) json.get("toX")).floatValue()));
 

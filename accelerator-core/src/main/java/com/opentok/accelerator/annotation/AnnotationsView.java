@@ -1383,8 +1383,13 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     @Override
     public void onItemSelected(final View v, final boolean selected) {
-        Log.d(LOG_TAG, "Signal info: " + v.getId());
-        Log.d(LOG_TAG, "Signal info: " + selected);
+        Log.d(LOG_TAG, "Signal info: =====>1 DONE" + v.getId() == R.id.done);
+        Log.d(LOG_TAG, "Signal info: =====>1 FREEHAND" + v.getId() == R.id.draw_freehand);
+        Log.d(LOG_TAG, "Signal info: =====>1 PICKER" + v.getId() == R.id.picker_color);
+        Log.d(LOG_TAG, "Signal info: =====>1 TYPE TOOL" + v.getId() == R.id.type_tool);
+        Log.d(LOG_TAG, "Signal info: =====>1 SCREENSHOT" + v.getId() == R.id.screenshot);
+        Log.d(LOG_TAG, "Signal info: =====>1 ERASE" + v.getId() == R.id.erase);
+        Log.d(LOG_TAG, "Signal info: =====>" + selected);
         ((Activity) mContext).runOnUiThread(new Runnable() {
             @Override
             public void run() {

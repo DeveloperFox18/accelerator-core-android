@@ -326,7 +326,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         mAnnotationsManager = new AnnotationsManager();
         mCurrentColor = getResources().getColor(R.color.picker_color_orange);
         mSelectedColor = mCurrentColor;
-        mode = Mode.Pen;
+        // mode = Mode.Pen;
         // this.setVisibility(View.GONE);
         addLogEvent(OpenTokConfig.LOG_ACTION_INITIALIZE, OpenTokConfig.LOG_VARIATION_SUCCESS);
     }
@@ -1462,7 +1462,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     @Override
     public void onSignalReceived(final SignalInfo signalInfo, boolean isSelfSignal) {
-        Log.i(LOG_TAG, "Signal info: " + signalInfo.mSignalName);
+        Log.d(LOG_TAG, "Signal info: " + signalInfo);
+        Log.d(LOG_TAG, "Signal info: " + isSelfSignal);
         ((Activity) mContext).runOnUiThread(new Runnable() {
             @Override
             public void run() {

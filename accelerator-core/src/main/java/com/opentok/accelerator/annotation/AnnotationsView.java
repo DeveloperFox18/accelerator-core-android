@@ -1395,18 +1395,16 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     clearAll(false, mSession.getConnection().getConnectionId());
                     //AnnotationsView.this.setVisibility(GONE);
                     mListener.onAnnotationsDone();
-                    AnnotationsView.this.setVisibility(VISIBLE);
-                    mode = Mode.Pen;
                     addLogEvent(OpenTokConfig.LOG_ACTION_DONE, OpenTokConfig.LOG_VARIATION_SUCCESS);
+                    mode = Mode.Pen;
                 }
                 if (v.getId() == R.id.erase) {
                     Log.d(LOG_TAG, "Signal info: =====>1 ERASE");
                     addLogEvent(OpenTokConfig.LOG_ACTION_ERASE, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     mode = Mode.Undo;
                     undoAnnotation(false, mSession.getConnection().getConnectionId());
-                    AnnotationsView.this.setVisibility(VISIBLE);
-                    mode = Mode.Pen;
                     addLogEvent(OpenTokConfig.LOG_ACTION_ERASE, OpenTokConfig.LOG_VARIATION_SUCCESS);
+                    mode = Mode.Pen;
                 }
                 if (v.getId() == R.id.screenshot) {
                     Log.d(LOG_TAG, "Signal info: =====>1 SCREENSHOT");
@@ -1427,7 +1425,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         Bitmap bmp = null;
                         mListener.onScreencaptureReady(bmp);
                     }
-                    AnnotationsView.this.setVisibility(VISIBLE);
                     mode = Mode.Pen;
                 }
                 if (selected) {

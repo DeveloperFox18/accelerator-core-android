@@ -1383,18 +1383,13 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     @Override
     public void onItemSelected(final View v, final boolean selected) {
-        Log.d(LOG_TAG, "Signal info: =====>1 DONE" + v.getId() == R.id.done);
-        Log.d(LOG_TAG, "Signal info: =====>1 FREEHAND" + v.getId() == R.id.draw_freehand);
-        Log.d(LOG_TAG, "Signal info: =====>1 PICKER" + v.getId() == R.id.picker_color);
-        Log.d(LOG_TAG, "Signal info: =====>1 TYPE TOOL" + v.getId() == R.id.type_tool);
-        Log.d(LOG_TAG, "Signal info: =====>1 SCREENSHOT" + v.getId() == R.id.screenshot);
-        Log.d(LOG_TAG, "Signal info: =====>1 ERASE" + v.getId() == R.id.erase);
         Log.d(LOG_TAG, "Signal info: =====>" + selected);
         ((Activity) mContext).runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
                 if (v.getId() == R.id.done) {
+                    Log.d(LOG_TAG, "Signal info: =====>1 DONE");
                     addLogEvent(OpenTokConfig.LOG_ACTION_DONE, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     mode = Mode.Clear;
                     clearAll(false, mSession.getConnection().getConnectionId());
@@ -1405,6 +1400,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     addLogEvent(OpenTokConfig.LOG_ACTION_DONE, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
                 if (v.getId() == R.id.erase) {
+                    Log.d(LOG_TAG, "Signal info: =====>1 ERASE");
                     addLogEvent(OpenTokConfig.LOG_ACTION_ERASE, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     mode = Mode.Undo;
                     undoAnnotation(false, mSession.getConnection().getConnectionId());
@@ -1413,6 +1409,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     addLogEvent(OpenTokConfig.LOG_ACTION_ERASE, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
                 if (v.getId() == R.id.screenshot) {
+                    Log.d(LOG_TAG, "Signal info: =====>1 SCREENSHOT");
                     addLogEvent(OpenTokConfig.LOG_ACTION_SCREEN_CAPTURE, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     //screenshot capture
                     mode = Mode.Capture;
@@ -1438,18 +1435,22 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                     if (v.getId() == R.id.picker_color) {
                         mode = Mode.Color;
+                        Log.d(LOG_TAG, "Signal info: =====>1 PICKER");
                         AnnotationsView.this.mToolbar.bringToFront();
                     } else {
                         if (v.getId() == R.id.type_tool) {
                             //type text
+                            Log.d(LOG_TAG, "Signal info: =====>1 TYPE TOOL");
                             mode = Mode.Text;
                         }
                         if (v.getId() == R.id.draw_freehand) {
                             //freehand lines
+                            Log.d(LOG_TAG, "Signal info: =====>1 FREEHAND");
                             mode = Mode.Pen;
                         }
                     }
                 } else {
+                    Log.d(LOG_TAG, "Signal info: =====>ELSE PART");
                     mode = null;
                 }
 

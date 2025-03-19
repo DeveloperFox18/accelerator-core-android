@@ -326,7 +326,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         mAnnotationsManager = new AnnotationsManager();
         mCurrentColor = getResources().getColor(R.color.picker_color_orange);
         mSelectedColor = mCurrentColor;
-        // mode = Mode.Pen;
+        mode = Mode.Pen;
         // this.setVisibility(View.GONE);
         addLogEvent(OpenTokConfig.LOG_ACTION_INITIALIZE, OpenTokConfig.LOG_VARIATION_SUCCESS);
     }
@@ -1393,12 +1393,14 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     clearAll(false, mSession.getConnection().getConnectionId());
                     //AnnotationsView.this.setVisibility(GONE);
                     mListener.onAnnotationsDone();
+                    mode = Mode.Pen;
                     addLogEvent(OpenTokConfig.LOG_ACTION_DONE, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
                 if (v.getId() == R.id.erase) {
                     addLogEvent(OpenTokConfig.LOG_ACTION_ERASE, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     mode = Mode.Undo;
                     undoAnnotation(false, mSession.getConnection().getConnectionId());
+                    mode = Mode.Pen;
                     addLogEvent(OpenTokConfig.LOG_ACTION_ERASE, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
                 if (v.getId() == R.id.screenshot) {
@@ -1419,6 +1421,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         Bitmap bmp = null;
                         mListener.onScreencaptureReady(bmp);
                     }
+                    mode = Mode.Pen;
                 }
                 if (selected) {
                     AnnotationsView.this.setVisibility(VISIBLE);

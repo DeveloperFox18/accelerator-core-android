@@ -1448,7 +1448,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     }
                 } else {
                     Log.d(LOG_TAG, "Signal info: =====>ELSE PART");
-                    mode = null;
+                    mode = Mode.Pen;
                 }
 
                 if (!loaded) {

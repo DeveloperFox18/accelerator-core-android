@@ -1383,6 +1383,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     @Override
     public void onItemSelected(final View v, final boolean selected) {
+        Log.d(LOG_TAG, "Signal info: " + v.getId());
+        Log.d(LOG_TAG, "Signal info: " + selected);
         ((Activity) mContext).runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -1393,6 +1395,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     clearAll(false, mSession.getConnection().getConnectionId());
                     //AnnotationsView.this.setVisibility(GONE);
                     mListener.onAnnotationsDone();
+                    AnnotationsView.this.setVisibility(VISIBLE);
                     mode = Mode.Pen;
                     addLogEvent(OpenTokConfig.LOG_ACTION_DONE, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
@@ -1400,6 +1403,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     addLogEvent(OpenTokConfig.LOG_ACTION_ERASE, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                     mode = Mode.Undo;
                     undoAnnotation(false, mSession.getConnection().getConnectionId());
+                    AnnotationsView.this.setVisibility(VISIBLE);
                     mode = Mode.Pen;
                     addLogEvent(OpenTokConfig.LOG_ACTION_ERASE, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
@@ -1421,6 +1425,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         Bitmap bmp = null;
                         mListener.onScreencaptureReady(bmp);
                     }
+                    AnnotationsView.this.setVisibility(VISIBLE);
                     mode = Mode.Pen;
                 }
                 if (selected) {

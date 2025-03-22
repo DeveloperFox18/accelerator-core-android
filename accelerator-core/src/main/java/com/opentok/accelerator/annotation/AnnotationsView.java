@@ -1132,6 +1132,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         final float x = event.getX();
         final float y = event.getY();
         Log.d(LOG_TAG, "onTouchEvent--->: " + mode);
+        Log.d(LOG_TAG, "onTouchEvent--->: " + oldMode);
         if(oldMode == null){
             oldMode= mode;
         }else{
@@ -1460,6 +1461,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     mode = Mode.Pen;
                 }
 
+                oldMode = mode;
+
                 if (!loaded) {
                     resize();
                     loaded = true;
@@ -1542,8 +1545,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     }
                 }else{
                     Log.d(LOG_TAG, "Signal info: =====>ELSE PART");
-                    mode = Mode.Pen;
-                    Log.d(LOG_TAG, "Signal info: =====>ELSE PART"+signalInfo.mSignalName);
                 }
             }
         });

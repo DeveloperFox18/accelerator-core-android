@@ -110,6 +110,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     private int mExtraHeight;
 
+    private Mode myMode;
+
 
     /**
      * Monitors state changes in the Annotations component.
@@ -1530,6 +1532,10 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             }
                         }
                     }
+                }else{
+                    Log.d(LOG_TAG, "Signal info: =====>ELSE PART");
+                    mode = Mode.Pen;
+                    Log.d(LOG_TAG, "Signal info: =====>ELSE PART"+signalInfo.mSignalName);
                 }
             }
         });

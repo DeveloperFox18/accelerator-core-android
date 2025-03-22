@@ -110,7 +110,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
     private int mExtraHeight;
 
-    private Mode myMode;
+    private Mode oldMode = null;
 
 
     /**
@@ -329,6 +329,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         mCurrentColor = getResources().getColor(R.color.picker_color_orange);
         mSelectedColor = mCurrentColor;
         mode = Mode.Pen;
+        // oldMode = Mode.Pen;
         // this.setVisibility(View.GONE);
         addLogEvent(OpenTokConfig.LOG_ACTION_INITIALIZE, OpenTokConfig.LOG_VARIATION_SUCCESS);
     }
@@ -1131,6 +1132,12 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         final float x = event.getX();
         final float y = event.getY();
         Log.d(LOG_TAG, "onTouchEvent--->: " + mode);
+        if(oldMode == null){
+            oldMode= mode;
+        }else{
+            mode = oldMode;
+        }
+            
         if (mode != null) {
             mCurrentColor = mSelectedColor;
             if (mode == Mode.Pen) {
@@ -1477,6 +1484,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
     public void onSignalReceived(final SignalInfo signalInfo, boolean isSelfSignal) {
         Log.d(LOG_TAG, "Signal info: " + signalInfo);
         Log.d(LOG_TAG, "Signal info: " + isSelfSignal);
+        oldMode = mode;
         ((Activity) mContext).runOnUiThread(new Runnable() {
             @Override
             public void run() {

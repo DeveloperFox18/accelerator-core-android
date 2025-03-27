@@ -895,7 +895,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         smoothed = (boolean) json.get("smoothed");
                     }
                 }
-                if (smoothed) {
+                if (false) {
                     if (isStartPoint) {
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);

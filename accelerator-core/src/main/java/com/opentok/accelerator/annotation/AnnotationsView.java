@@ -39,6 +39,8 @@ import java.util.UUID;
 import android.util.TypedValue;
 import android.os.Handler;
 import java.lang.Runnable;
+import android.os.Looper;
+
 
 
 
@@ -1307,9 +1309,12 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     });
 
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        println("This runs after 20 seconds");
-                        editText.setVisibility(GONE);
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.out.println("This runs after 20 seconds");
+                            editText.setVisibility(View.GONE);
+                        }
                     }, 20000);
                     //this code add via abhishek
                     parent.addView(editText);

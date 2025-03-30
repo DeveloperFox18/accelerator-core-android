@@ -1281,7 +1281,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                     requestLayout();
                                     editFieldClose.onDoneClick();
                                     Log.d(LOG_TAG, "Abhi Refreshed UI");
-                        
+                                editText.clearFocus();
                                 Log.d(LOG_TAG, "Abhi onEditorAction: " + mCurrentText.getEditText().getText().toString());                       
                                 mCurrentText = null;
                                

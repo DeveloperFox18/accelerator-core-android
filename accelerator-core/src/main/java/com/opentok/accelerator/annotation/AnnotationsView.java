@@ -1261,21 +1261,20 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 } catch (Exception e) {
                                     Log.e(LOG_TAG, e.toString());
                                 }
-                                
-
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        ViewGroup parentET = (ViewGroup) editText.getParent();
-                                        if (parentET != null) {
-                                            editText.setBackgroundResource(R.drawable.input_text);
-                                            parentET.removeView(editText);
-                                            Log.d(LOG_TAG, "Abhi Removed EditText");
-                                        }
-                                        invalidate();
-                                        requestLayout();
-                                    }
-                                }, 300);
+                            
+                                // new Handler().postDelayed(new Runnable() {
+                                //     @Override
+                                //     public void run() {
+                                //         ViewGroup parentET = (ViewGroup) editText.getParent();
+                                //         if (parentET != null) {
+                                //             editText.setBackgroundResource(R.drawable.input_text);
+                                //             parentET.removeView(editText);
+                                //             Log.d(LOG_TAG, "Abhi Removed EditText");
+                                //         }
+                                //         invalidate();
+                                //         requestLayout();
+                                //     }
+                                // }, 300);
                                 // Remove TextView first
                                     // ViewGroup parentTV = (ViewGroup) textView.getParent();
                                     // if (parentTV != null) {
@@ -1294,6 +1293,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                     invalidate();
                                     requestLayout();
                                     Log.d(LOG_TAG, "Abhi Refreshed UI");
+
+
                                 // parent.removeView(editText);
                                 //parent.removeView(textView);
                         
@@ -1305,6 +1306,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             return false;
                         }
                     });
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        println("This runs after 20 seconds")
+                        editText.setVisibility(GONE);
+                    }, 20000) 
                     //this code add via abhishek
                     parent.addView(editText);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);

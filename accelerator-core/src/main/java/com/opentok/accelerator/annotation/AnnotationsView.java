@@ -1297,30 +1297,21 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                            }
                         });
 
-                    // post(new Runnable() { // Ensures view is already attached
-                    //     @Override
-                    //     public void run() {
-                    //         View rootView = getRootView(); // Get top-most view in hierarchy
-                    //         Log.d("AnnotationView","onGlobalLayout runnning calling....");
-                    //         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    //             @Override
-                    //             public void onGlobalLayout() {
-                    //                 Log.d("AnnotationView","onGlobalLayout mode is null....");
-                    //                 Rect r = new Rect();
-                    //                 rootView.getWindowVisibleDisplayFrame(r);
-                    //                 int screenHeight = rootView.getHeight();
-                    //                 int keypadHeight = screenHeight - r.bottom;
-            
-                    //                 boolean isKeyboardVisible = keypadHeight > screenHeight * 0.15;
-            
-                    //                 if (!isKeyboardVisible) {
-                    //                     editText.setVisibility(GONE);
-                    //                     Toast.makeText(getContext(), "Keyboard Hidden", Toast.LENGTH_SHORT).show();
-                    //                 }
-                    //             }
-                    //         });
-                    //     }
-                    // });
+                    parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            Rect r = new Rect();
+                            yourParentView.getWindowVisibleDisplayFrame(r);
+                            int screenHeight = yourParentView.getHeight();
+                            int keypadHeight = screenHeight - r.bottom;
+                    
+                            if (keypadHeight > screenHeight * 0.15) { // Keyboard is open
+                                params.bottomMargin = keypadHeight + 20; // Move EditText above keyboard
+                                editText.setLayoutParams(params);
+                            }
+                        }
+                    });
+
                     //this code add via abhishek
                     parent.addView(editText);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);

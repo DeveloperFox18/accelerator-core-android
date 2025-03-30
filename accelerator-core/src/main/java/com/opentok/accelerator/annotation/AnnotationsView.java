@@ -1201,9 +1201,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     }
 
                     EditText editText = new EditText(getContext());
+                   
                     editText.setVisibility(VISIBLE);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                   
+                    editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics()));
+                    editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics()));
                     // Add whatever you want as size
                     int editTextHeight = 70;
                     int editTextWidth = 200;
@@ -1214,37 +1216,16 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     params.topMargin = (int) (event.getRawY());
                     params.leftMargin = (int) (event.getRawX());
 
-                   
-                   
-
-                    getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                        @Override
-                        public void onGlobalLayout() {
-                            Rect r = new Rect();
-                            getWindowVisibleDisplayFrame(r);
-                            int screenHeight = getHeight();
-                            int keypadHeight = screenHeight - r.bottom;
-            
-                           
-                                if (keypadHeight > screenHeight * 0.15) {
-                                    // Move EditText just above the keyboard
-                                    FrameLayout.LayoutParams keyBoardAdjParams = (FrameLayout.LayoutParams) editText.getLayoutParams();
-                                    keyBoardAdjParams.bottomMargin = keypadHeight + 70; // 20px padding
-                                    editText.setLayoutParams(keyBoardAdjParams);
-                                }else{
-                                    editText.setLayoutParams(params);
-                                }
-                                editText.setPadding(15, 0, 15, 0);
-                                editText.setVisibility(VISIBLE);
-                                editText.setSingleLine();
-                                editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                                editText.requestFocus();
-                                editText.setTextSize(12f);
-                        }
-                    });
+                    editText.setLayoutParams(params);
+                    editText.setPadding(15, 0, 15, 0);
+                    editText.setVisibility(VISIBLE);
+                    editText.setSingleLine();
+                    editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                    editText.requestFocus();
+                    editText.setTextSize(12f);
 
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.SHOW_IMPLICIT);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
                     createTextAnnotatable(editText, x, y);
 
@@ -1292,7 +1273,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                     // Ensure UI refresh
                                     invalidate();
                                     requestLayout();
-                                   
                                     Log.d(LOG_TAG, "Abhi Refreshed UI");
                                     editText.clearFocus();
                         

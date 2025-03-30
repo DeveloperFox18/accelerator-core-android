@@ -1207,16 +1207,16 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics()));
                     editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics()));
                     // Add whatever you want as size
-                    int editTextHeight = 70;
-                    int editTextWidth =  parent.getRootView().getWidth()- 10;
+                    // int editTextHeight = 70;
+                    // int editTextWidth =  parent.getRootView().getWidth()- 10;
 
-                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(editTextWidth, editTextHeight);
+                    // FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(editTextWidth, editTextHeight);
 
-                    //You could adjust the position
-                    params.topMargin = (int) (event.getRawY());
-                    params.leftMargin = 5; //(int) (event.getRawX());
+                    // //You could adjust the position
+                    // params.topMargin = (int) (event.getRawY());
+                    // params.leftMargin = 5; //(int) (event.getRawX());
 
-                    editText.setLayoutParams(params);
+                    // editText.setLayoutParams(params);
                     editText.setPadding(15, 0, 15, 0);
                     editText.setVisibility(VISIBLE);
                     editText.setSingleLine();
@@ -1233,9 +1233,16 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             rootView.getWindowVisibleDisplayFrame(r);
                             int screenHeight = rootView.getHeight();
                             int keypadHeight = screenHeight - r.bottom;
-                            
+                            int editTextHeight = 70;
+                            int editTextWidth = rootView.getWidth()- 10;
                             Log.d(LOG_TAG, "onGlobalLayout keyboard height "+keypadHeight+" , "+screenHeight+" r.bottom "+r.bottom+" top "+r.top+" left "+r.left+" right "+r.right);
                             if (keypadHeight > screenHeight * 0.15) { // Keyboard is open
+                                
+                                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(editTextWidth, editTextHeight);
+
+                                //You could adjust the position
+                                params.topMargin = (int) (event.getRawY());
+                                params.leftMargin = 5; //(int) (event.getRawX());
                                 Log.d(LOG_TAG, "onGlobalLayout keyboard is open "+keypadHeight);
                                 params.topMargin = keypadHeight + 20; // Move EditText above keyboard
                                 editText.setLayoutParams(params);

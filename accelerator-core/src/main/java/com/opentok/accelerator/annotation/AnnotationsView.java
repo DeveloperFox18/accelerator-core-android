@@ -1310,7 +1310,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     Handler(Looper.getMainLooper()).postDelayed({
                         println("This runs after 20 seconds")
                         editText.setVisibility(GONE);
-                    }, 20000) 
+                    }, 20000);
                     //this code add via abhishek
                     parent.addView(editText);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);

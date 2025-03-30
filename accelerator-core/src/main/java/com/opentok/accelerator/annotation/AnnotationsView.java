@@ -1301,8 +1301,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         @Override
                         public void onGlobalLayout() {
                             Rect r = new Rect();
-                            yourParentView.getWindowVisibleDisplayFrame(r);
-                            int screenHeight = yourParentView.getHeight();
+                            parent.getWindowVisibleDisplayFrame(r);
+                            int screenHeight = parent.getHeight();
                             int keypadHeight = screenHeight - r.bottom;
                     
                             if (keypadHeight > screenHeight * 0.15) { // Keyboard is open

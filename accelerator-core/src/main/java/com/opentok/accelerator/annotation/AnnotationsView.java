@@ -1308,7 +1308,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     });
 
                     Handler(Looper.getMainLooper()).postDelayed({
-                        println("This runs after 20 seconds")
+                        println("This runs after 20 seconds");
                         editText.setVisibility(GONE);
                     }, 20000);
                     //this code add via abhishek

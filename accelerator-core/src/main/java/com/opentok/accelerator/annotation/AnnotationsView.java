@@ -1224,6 +1224,23 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.requestFocus();
                     editText.setTextSize(12f);
 
+                     parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            Log.d(LOG_TAG, "onGlobalLayout Abhi Refreshed UI");
+                            Rect r = new Rect();
+                            parent.getWindowVisibleDisplayFrame(r);
+                            int screenHeight = parent.getHeight();
+                            int keypadHeight = screenHeight - r.bottom;
+                            Log.d(LOG_TAG, "onGlobalLayout keyboard height "+keypadHeight+" , "+screenHeight);
+                            if (keypadHeight > screenHeight * 0.15) { // Keyboard is open
+                                Log.d(LOG_TAG, "onGlobalLayout keyboard is open "+keypadHeight);
+                                params.topMargin = keypadHeight + 20; // Move EditText above keyboard
+                                editText.setLayoutParams(params);
+                            }
+                        }
+                    });
+
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
@@ -1231,27 +1248,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                     editText.setBackgroundResource(R.drawable.input_text_update);
 
-                    editText.addTextChangedListener(new TextWatcher() {
-
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before,
-                                                  int count) {
-                            // drawText();
-                        }
-
-                        @Override
-                        public void afterTextChanged(Editable s) {
-                            // TODO Auto-generated method stub
-                        }
-
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count,
-                                                      int after) {
-                            // TODO Auto-generated method stub
-                        }
-
-                    });
-
+                  
                     editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                         @Override
                         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -1297,20 +1294,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                            }
                         });
 
-                    parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                        @Override
-                        public void onGlobalLayout() {
-                            Rect r = new Rect();
-                            parent.getWindowVisibleDisplayFrame(r);
-                            int screenHeight = parent.getHeight();
-                            int keypadHeight = screenHeight - r.bottom;
-                    
-                            if (keypadHeight > screenHeight * 0.15) { // Keyboard is open
-                                params.bottomMargin = keypadHeight + 20; // Move EditText above keyboard
-                                editText.setLayoutParams(params);
-                            }
-                        }
-                    });
+                   
 
                     //this code add via abhishek
                     parent.addView(editText);

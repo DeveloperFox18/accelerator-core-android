@@ -1276,42 +1276,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                     Log.e(LOG_TAG, e.toString());
                                 }
                             
-                                // new Handler().postDelayed(new Runnable() {
-                                //     @Override
-                                //     public void run() {
-                                //         ViewGroup parentET = (ViewGroup) editText.getParent();
-                                //         if (parentET != null) {
-                                //             editText.setBackgroundResource(R.drawable.input_text);
-                                //             parentET.removeView(editText);
-                                //             Log.d(LOG_TAG, "Abhi Removed EditText");
-                                //         }
-                                //         invalidate();
-                                //         requestLayout();
-                                //     }
-                                // }, 300);
-                                // Remove TextView first
-                                    // ViewGroup parentTV = (ViewGroup) textView.getParent();
-                                    // if (parentTV != null) {
-                                    //     parentTV.removeView(textView);
-                                    //     Log.d(LOG_TAG, "Abhi Removed TextView");
-                                    // }
-
-                                    // // Remove EditText
-                                    // ViewGroup parentET = (ViewGroup) editText.getParent();
-                                    // if (parentET != null) {
-                                    //     parentET.removeView(editText);
-                                    //     Log.d(LOG_TAG, "Abhi Removed EditText");
-                                    // }
-
                                     // Ensure UI refresh
                                     invalidate();
                                     requestLayout();
                                     editFieldClose.onDoneClick();
                                     Log.d(LOG_TAG, "Abhi Refreshed UI");
-
-
-                                // parent.removeView(editText);
-                                //parent.removeView(textView);
                         
                                 Log.d(LOG_TAG, "Abhi onEditorAction: " + mCurrentText.getEditText().getText().toString());                       
                                 mCurrentText = null;
@@ -1322,30 +1291,42 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     });
 
-                    post(new Runnable() { // Ensures view is already attached
+                    editText.setOnFocusChangeListener(new OnFocusChangeListener() {
                         @Override
-                        public void run() {
-                            View rootView = getRootView(); // Get top-most view in hierarchy
-                            Log.d("AnnotationView","onGlobalLayout runnning calling....");
-                            rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                                @Override
-                                public void onGlobalLayout() {
-                                    Log.d("AnnotationView","onGlobalLayout mode is null....");
-                                    Rect r = new Rect();
-                                    rootView.getWindowVisibleDisplayFrame(r);
-                                    int screenHeight = rootView.getHeight();
-                                    int keypadHeight = screenHeight - r.bottom;
-            
-                                    boolean isKeyboardVisible = keypadHeight > screenHeight * 0.15;
-            
-                                    if (!isKeyboardVisible) {
-                                        editText.setVisibility(GONE);
-                                        Toast.makeText(getContext(), "Keyboard Hidden", Toast.LENGTH_SHORT).show();
-                                    }
+                        public void onFocusChange(View v, boolean hasFocus) {
+                                if (hasFocus) {
+                                    //got focus
+                                } else {
+                                    Log.d(LOG_TAG, "Focus loss");
+                                    editText.setVisibility(GONE);
                                 }
-                            });
-                        }
-                    });
+                           }
+                        });
+
+                    // post(new Runnable() { // Ensures view is already attached
+                    //     @Override
+                    //     public void run() {
+                    //         View rootView = getRootView(); // Get top-most view in hierarchy
+                    //         Log.d("AnnotationView","onGlobalLayout runnning calling....");
+                    //         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    //             @Override
+                    //             public void onGlobalLayout() {
+                    //                 Log.d("AnnotationView","onGlobalLayout mode is null....");
+                    //                 Rect r = new Rect();
+                    //                 rootView.getWindowVisibleDisplayFrame(r);
+                    //                 int screenHeight = rootView.getHeight();
+                    //                 int keypadHeight = screenHeight - r.bottom;
+            
+                    //                 boolean isKeyboardVisible = keypadHeight > screenHeight * 0.15;
+            
+                    //                 if (!isKeyboardVisible) {
+                    //                     editText.setVisibility(GONE);
+                    //                     Toast.makeText(getContext(), "Keyboard Hidden", Toast.LENGTH_SHORT).show();
+                    //                 }
+                    //             }
+                    //         });
+                    //     }
+                    // });
                     //this code add via abhishek
                     parent.addView(editText);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);

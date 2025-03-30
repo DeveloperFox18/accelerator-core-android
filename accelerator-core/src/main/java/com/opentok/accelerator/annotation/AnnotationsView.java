@@ -41,6 +41,10 @@ import android.util.TypedValue;
 import android.os.Handler;
 import java.lang.Runnable;
 import android.os.Looper;
+import android.graphics.Rect;
+import android.view.ViewTreeObserver;
+import android.widget.Toast;
+
 
 
 
@@ -1201,13 +1205,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         @Override
                         public void onDoneClick() {
                             System.out.println("Done button clicked!");
-                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    System.out.println("This runs after 20 seconds");
-                                    editText.setVisibility(View.GONE);
-                                }
-                            }, 800);
+                           
                         }
                     }; 
                     editText.setVisibility(VISIBLE);
@@ -1324,7 +1322,30 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     });
 
-                   
+                    post(new Runnable() { // Ensures view is already attached
+                        @Override
+                        public void run() {
+                            View rootView = getRootView(); // Get top-most view in hierarchy
+                            Log.d("AnnotationView","onGlobalLayout runnning calling....");
+                            rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                                @Override
+                                public void onGlobalLayout() {
+                                    Log.d("AnnotationView","onGlobalLayout mode is null....");
+                                    Rect r = new Rect();
+                                    rootView.getWindowVisibleDisplayFrame(r);
+                                    int screenHeight = rootView.getHeight();
+                                    int keypadHeight = screenHeight - r.bottom;
+            
+                                    boolean isKeyboardVisible = keypadHeight > screenHeight * 0.15;
+            
+                                    if (!isKeyboardVisible) {
+                                        editText.setVisibility(GONE);
+                                        Toast.makeText(getContext(), "Keyboard Hidden", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+                    });
                     //this code add via abhishek
                     parent.addView(editText);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);

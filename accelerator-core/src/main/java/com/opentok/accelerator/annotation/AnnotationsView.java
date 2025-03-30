@@ -1228,9 +1228,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                            
                                 if (keypadHeight > screenHeight * 0.15) {
                                     // Move EditText just above the keyboard
-                                    LayoutParams keyBoardAdjparams = (LayoutParams) editText.getLayoutParams();
-                                    keyBoardAdjparams.bottomMargin = keypadHeight + 70; // 20px padding
-                                    editText.setLayoutParams(keyBoardAdjparams);
+                                    FrameLayout.LayoutParams keyBoardAdjParams = (FrameLayout.LayoutParams) editText.getLayoutParams();
+                                    keyBoardAdjParams.bottomMargin = keypadHeight + 70; // 20px padding
+                                    editText.setLayoutParams(keyBoardAdjParams);
                                 }else{
                                     editText.setLayoutParams(params);
                                 }

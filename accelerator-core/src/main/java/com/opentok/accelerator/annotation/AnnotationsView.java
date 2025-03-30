@@ -1201,9 +1201,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     }
 
                     EditText editText = new EditText(getContext());
-                   
-                    editText.setVisibility(VISIBLE);
-                    editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                    editText.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
+                   // editText.setVisibility(VISIBLE);
+                    //editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     // editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics()));
                     // editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics()));
                     // Add whatever you want as size

@@ -29,6 +29,7 @@ import com.opentok.accelerator.core.signal.SignalInfo;
 import com.opentok.accelerator.core.wrapper.OTAcceleratorSession;
 import com.tokbox.android.logging.OTKAnalytics;
 import com.tokbox.android.logging.OTKAnalyticsData;
+import com.opentok.accelerator.annotation.utils.EditFieldCloseInterface;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -1196,6 +1197,19 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     }
 
                     EditText editText = new EditText(getContext());
+                    EditFieldCloseInterface editFieldClose = new EditFieldCloseInterface() {
+                        @Override
+                        public void onDoneClick() {
+                            System.out.println("Done button clicked!");
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    System.out.println("This runs after 20 seconds");
+                                    editText.setVisibility(View.GONE);
+                                }
+                            }, 800);
+                        }
+                    }; 
                     editText.setVisibility(VISIBLE);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics()));
@@ -1294,6 +1308,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                     // Ensure UI refresh
                                     invalidate();
                                     requestLayout();
+                                    editFieldClose.onDoneClick();
                                     Log.d(LOG_TAG, "Abhi Refreshed UI");
 
 
@@ -1309,13 +1324,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     });
 
-                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            System.out.println("This runs after 20 seconds");
-                            editText.setVisibility(View.GONE);
-                        }
-                    }, 20000);
+                   
                     //this code add via abhishek
                     parent.addView(editText);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);

@@ -1229,10 +1229,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         public void onGlobalLayout() {
                             Log.d(LOG_TAG, "onGlobalLayout Abhi Refreshed UI");
                             Rect r = new Rect();
-                            parent.getWindowVisibleDisplayFrame(r);
-                            int screenHeight = parent.getHeight();
+                            View rootView = parent.getRootView();
+                            rootView.getWindowVisibleDisplayFrame(r);
+                            int screenHeight = rootView.getHeight();
                             int keypadHeight = screenHeight - r.bottom;
-                            Log.d(LOG_TAG, "onGlobalLayout keyboard height "+keypadHeight+" , "+screenHeight);
+                            Log.d(LOG_TAG, "onGlobalLayout keyboard height "+keypadHeight+" , "+screenHeight+" r.bottom "+r.bottom+" top "+r.top+" left "+r.left+" right "+r.right);
                             if (keypadHeight > screenHeight * 0.15) { // Keyboard is open
                                 Log.d(LOG_TAG, "onGlobalLayout keyboard is open "+keypadHeight);
                                 params.topMargin = keypadHeight + 20; // Move EditText above keyboard

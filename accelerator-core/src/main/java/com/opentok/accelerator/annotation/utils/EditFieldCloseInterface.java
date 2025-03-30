@@ -1,4 +1,4 @@
-public class EditFieldCloseInterface {
+interface EditFieldCloseInterface {
     void onDoneClick();
     
 }

@@ -1200,33 +1200,20 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         throw new IllegalStateException("AnnotationsView must have a parent ViewGroup!");
                     }
 
+                   
                     EditText editText = new EditText(getContext());
-                    editText.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
-                   // editText.setVisibility(VISIBLE);
-                    //editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                    // editText.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics()));
-                    // editText.setMinWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics()));
-                    // Add whatever you want as size
-                    // int editTextHeight = 70;
-                    // int editTextWidth =  parent.getRootView().getWidth()- 10;
-
-                    // FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(editTextWidth, editTextHeight);
-
-                    // //You could adjust the position
-                    // params.topMargin = (int) (event.getRawY());
-                    // params.leftMargin = 5; //(int) (event.getRawX());
-
-                    // editText.setLayoutParams(params);
-                    editText.setPadding(15, 0, 15, 0);
-                    editText.setVisibility(VISIBLE);
-                    editText.setSingleLine();
-                    editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                    editText.requestFocus();
-                    editText.setTextSize(12f);
-
                      parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {
+                           
+                            editText.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
+                          
+                            editText.setPadding(15, 0, 15, 0);
+                            editText.setVisibility(VISIBLE);
+                            editText.setSingleLine();
+                            editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                            editText.requestFocus();
+                            editText.setTextSize(12f);
                             Log.d(LOG_TAG, "onGlobalLayout Abhi Refreshed UI");
                             Rect r = new Rect();
                             View rootView = parent.getRootView();

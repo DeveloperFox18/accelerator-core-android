@@ -1208,7 +1208,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.setSingleLine();
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
-                    editText.setTextSize(12f);
+                    editText.setTextSize(12f); 
+                    editText.setVisibility(GONE);
 
                      parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
@@ -1221,6 +1222,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             int keypadHeight = screenHeight - r.bottom;
                             int editTextHeight = 70;
                             int editTextWidth = rootView.getWidth()- 10;
+                            editText.setVisibility(VISIBLE);
                             Log.d(LOG_TAG, "onGlobalLayout keyboard height "+keypadHeight+" , "+screenHeight+" r.bottom "+r.bottom+" top "+r.top+" left "+r.left+" right "+r.right);
                             if (keypadHeight > screenHeight * 0.15) { // Keyboard is open
                                 

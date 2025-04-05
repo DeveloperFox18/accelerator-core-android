@@ -1201,17 +1201,18 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     }
 
                     EditText editText = new EditText(getContext());
-                    editText.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
-                  
+                   
+                    editText.setVisibility(VISIBLE);
+                    editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
                     editText.setPadding(15, 0, 15, 0);
                     editText.setVisibility(VISIBLE);
                     editText.setSingleLine();
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
-                    editText.setTextSize(12f); 
-                    editText.setVisibility(GONE);
+                    editText.setTextSize(12f);
 
-                     parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {
                             Log.d(LOG_TAG, "onGlobalLayout Abhi Refreshed UI");
@@ -1222,7 +1223,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             int keypadHeight = screenHeight - r.bottom;
                             int editTextHeight = 70;
                             int editTextWidth = rootView.getWidth()- 10;
-                            editText.setVisibility(VISIBLE);
                             Log.d(LOG_TAG, "onGlobalLayout keyboard height "+keypadHeight+" , "+screenHeight+" r.bottom "+r.bottom+" top "+r.top+" left "+r.left+" right "+r.right);
                             if (keypadHeight > screenHeight * 0.15) { // Keyboard is open
                                 
@@ -1245,7 +1245,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                     editText.setBackgroundResource(R.drawable.input_text_update);
 
-                  
                     editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                         @Override
                         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -1290,9 +1289,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 }
                            }
                         });
-
                    
-
                     //this code add via abhishek
                     parent.addView(editText);
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);

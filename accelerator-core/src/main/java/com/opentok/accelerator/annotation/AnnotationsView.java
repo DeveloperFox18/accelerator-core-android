@@ -495,6 +495,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 if (curved) {
                     mCurrentPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
                 } else {
+                    Log.d(LOG_TAG, "moveTouch  " + x+" y ");
                     mCurrentPath.lineTo(x, y);
                 }
             }
@@ -924,7 +925,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     }
                 } else {
-                    if (true) { // Update here
+                    if (isStartPoint && endPoint) { 
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
@@ -1153,6 +1154,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 addLogEvent(OpenTokConfig.LOG_ACTION_FREEHAND, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: {
+                        Log.d(LOG_TAG, "onTouchEvent ACTION_DOWN " + x+" y "+y);
                         addLogEvent(OpenTokConfig.LOG_ACTION_START_DRAWING, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
@@ -1164,6 +1166,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     }
                     break;
                     case MotionEvent.ACTION_MOVE: {
+                        Log.d(LOG_TAG, "onTouchEvent ACTION_MOVE " + x+" y "+y);
                         moveTouch(x, y, true);
 
                         sendAnnotation(mode.toString(), buildSignalFromPoint(x, y, false, false));
@@ -1172,6 +1175,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     }
                     break;
                     case MotionEvent.ACTION_UP: {
+                        Log.d(LOG_TAG, "onTouchEvent ACTION_UP " + x+" y "+y);
                         addLogEvent(OpenTokConfig.LOG_ACTION_END_DRAWING, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                         upTouch();
                         sendAnnotation(mode.toString(), buildSignalFromPoint(x, y, false, true));

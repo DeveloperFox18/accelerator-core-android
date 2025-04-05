@@ -1194,26 +1194,25 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     final String myString;
 
                     mAnnotationsActive = true;
+
+                    ViewGroup parent = (ViewGroup) this.getParent();
+                    if (parent == null) {
+                        throw new IllegalStateException("AnnotationsView must have a parent ViewGroup!");
+                    }
+
                     EditText editText = new EditText(getContext());
                     editText.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
+                  
                     editText.setPadding(15, 0, 15, 0);
                     editText.setVisibility(VISIBLE);
                     editText.setSingleLine();
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
                     editText.setTextSize(12f);
-                    
-                    ViewGroup parent = (ViewGroup) this.getParent();
-                    if (parent == null) {
-                        throw new IllegalStateException("AnnotationsView must have a parent ViewGroup!");
-                    }
-                   
+
                      parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {
-                          
-                           
-                           
                             Log.d(LOG_TAG, "onGlobalLayout Abhi Refreshed UI");
                             Rect r = new Rect();
                             View rootView = parent.getRootView();
@@ -1224,15 +1223,16 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             int editTextWidth = rootView.getWidth()- 10;
                             Log.d(LOG_TAG, "onGlobalLayout keyboard height "+keypadHeight+" , "+screenHeight+" r.bottom "+r.bottom+" top "+r.top+" left "+r.left+" right "+r.right);
                             if (keypadHeight > screenHeight * 0.15) { // Keyboard is open
+                                
                                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(editTextWidth, editTextHeight);
+
+                                //You could adjust the position
                                 params.topMargin = (int) (event.getRawY());
                                 params.leftMargin = 5; //(int) (event.getRawX());
                                 Log.d(LOG_TAG, "onGlobalLayout keyboard is open "+keypadHeight);
                                 params.topMargin = keypadHeight + 20; // Move EditText above keyboard
                                 editText.setLayoutParams(params);
                             }
-                            
-                            
                         }
                     });
 

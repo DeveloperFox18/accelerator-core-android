@@ -1314,7 +1314,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         return true;
     }
 
-    public static float getScreenHeightDpi(int heightPixels) {
+    public  float getScreenHeightDpi(int heightPixels) {
         DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
         return heightPixels / metrics.ydpi;
     }

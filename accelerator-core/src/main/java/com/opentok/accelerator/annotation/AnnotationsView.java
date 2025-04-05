@@ -1195,7 +1195,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                     mAnnotationsActive = true;
                     EditText editText = new EditText(getContext());
-                   
+                    editText.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
                     ViewGroup parent = (ViewGroup) this.getParent();
                     if (parent == null) {
                         throw new IllegalStateException("AnnotationsView must have a parent ViewGroup!");
@@ -1205,7 +1205,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         @Override
                         public void onGlobalLayout() {
                           
-                            editText.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
+                           
                             editText.setPadding(15, 0, 15, 0);
                             editText.setVisibility(VISIBLE);
                             editText.setSingleLine();

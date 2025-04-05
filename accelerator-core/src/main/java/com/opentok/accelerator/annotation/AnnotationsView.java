@@ -1489,8 +1489,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                 String cid = signalInfo.mSrcConnId;
                 String mycid = signalInfo.mDstConnId;
-
-                if (!cid.equals(mycid)) { // Ensure that we only handle signals from other users on the current canvas
+//cid.equals(mycid)
+                if (!isSelfSignal) { // Ensure that we only handle signals from other users on the current canvas
                     Log.i(LOG_TAG, "Incoming annotation");
                     AnnotationsView.this.setVisibility(VISIBLE);
                     if (!loaded) {

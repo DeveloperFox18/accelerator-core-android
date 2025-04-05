@@ -1315,7 +1315,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
     }
 
     public static float getScreenHeightDpi(int heightPixels) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
         return heightPixels / metrics.ydpi;
     }
 

@@ -1226,7 +1226,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             int keypadHeight = screenHeight - r.bottom;
                             int editTextHeight = 70;
                             int editTextWidth = rootView.getWidth()- 10;
-                            editText.setBackgroundResource(R.drawable.input_text_update);
+                            //editText.setBackgroundResource(R.drawable.input_text_update);
 
                             Log.d(LOG_TAG, "onGlobalLayout keyboard height "+keypadHeight+" , "+screenHeight+" r.bottom "+r.bottom+" top "+r.top+" left "+r.left+" right "+r.right);
                             if (keypadHeight > screenHeight * 0.15) { // Keyboard is open

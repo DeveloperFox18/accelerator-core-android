@@ -1229,6 +1229,18 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 params.topMargin = keypadHeight + 20; // Move EditText above keyboard
                                 editText.setLayoutParams(params);
                             }
+
+                            editText.setOnFocusChangeListener(new OnFocusChangeListener() {
+                                @Override
+                                public void onFocusChange(View v, boolean hasFocus) {
+                                        if (hasFocus) {
+                                            //got focus
+                                        } else {
+                                            Log.d(LOG_TAG, "Focus loss");
+                                            editText.setVisibility(GONE);
+                                        }
+                                   }
+                                });
                             
                         }
                     });
@@ -1274,17 +1286,17 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     });
 
-                    editText.setOnFocusChangeListener(new OnFocusChangeListener() {
-                        @Override
-                        public void onFocusChange(View v, boolean hasFocus) {
-                                if (hasFocus) {
-                                    //got focus
-                                } else {
-                                    Log.d(LOG_TAG, "Focus loss");
-                                    editText.setVisibility(GONE);
-                                }
-                           }
-                        });
+                    // editText.setOnFocusChangeListener(new OnFocusChangeListener() {
+                    //     @Override
+                    //     public void onFocusChange(View v, boolean hasFocus) {
+                    //             if (hasFocus) {
+                    //                 //got focus
+                    //             } else {
+                    //                 Log.d(LOG_TAG, "Focus loss");
+                    //                 editText.setVisibility(GONE);
+                    //             }
+                    //        }
+                    //     });
 
                    
 

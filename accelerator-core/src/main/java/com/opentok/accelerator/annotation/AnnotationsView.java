@@ -1212,6 +1212,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.requestFocus();
                     editText.setTextSize(12f);
 
+                    editText.setBackgroundResource(R.drawable.input_text);
+
                     parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {

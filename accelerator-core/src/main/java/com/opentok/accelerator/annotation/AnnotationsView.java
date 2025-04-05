@@ -1199,13 +1199,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     if (parent == null) {
                         throw new IllegalStateException("AnnotationsView must have a parent ViewGroup!");
                     }
-
                    
-                    EditText editText = new EditText(getContext());
                      parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {
-                           
+                            EditText editText = new EditText(getContext());
                             editText.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
                           
                             editText.setPadding(15, 0, 15, 0);
@@ -1224,76 +1222,72 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             int editTextWidth = rootView.getWidth()- 10;
                             Log.d(LOG_TAG, "onGlobalLayout keyboard height "+keypadHeight+" , "+screenHeight+" r.bottom "+r.bottom+" top "+r.top+" left "+r.left+" right "+r.right);
                             if (keypadHeight > screenHeight * 0.15) { // Keyboard is open
-                                
                                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(editTextWidth, editTextHeight);
-
-                                //You could adjust the position
                                 params.topMargin = (int) (event.getRawY());
                                 params.leftMargin = 5; //(int) (event.getRawX());
                                 Log.d(LOG_TAG, "onGlobalLayout keyboard is open "+keypadHeight);
                                 params.topMargin = keypadHeight + 20; // Move EditText above keyboard
                                 editText.setLayoutParams(params);
                             }
+                            createTextAnnotatable(editText, x, y);
+
+                            editText.setBackgroundResource(R.drawable.input_text_update);
+
+                            editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                                @Override
+                                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                                        
+                                        InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                                        if(mCurrentText != null)
+                                        sendAnnotation(mode.toString(), buildSignalFromText(x, y, mCurrentText.getEditText().getText().toString(), false, true));
+                                        
+                                        //Create annotatable text and add it to the canvas
+                                        mAnnotationsActive = false;
+                                        try {
+                                            addAnnotatable(mSession.getConnection().getConnectionId());                                  
+                                        } catch (Exception e) {
+                                            Log.e(LOG_TAG, e.toString());
+                                        }
+                                    
+                                            // Ensure UI refresh
+                                            invalidate();
+                                            requestLayout();
+                                            Log.d(LOG_TAG, "Abhi Refreshed UI");
+                                            editText.clearFocus();
+                                
+                                        Log.d(LOG_TAG, "Abhi onEditorAction: " + mCurrentText.getEditText().getText().toString());                       
+                                        mCurrentText = null;
+                                       
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                            });
+        
+                            editText.setOnFocusChangeListener(new OnFocusChangeListener() {
+                                @Override
+                                public void onFocusChange(View v, boolean hasFocus) {
+                                        if (hasFocus) {
+                                            //got focus
+                                        } else {
+                                            Log.d(LOG_TAG, "Focus loss");
+                                            editText.setVisibility(GONE);
+                                        }
+                                   }
+                            });
+
+                            parent.addView(editText);
+
                         }
                     });
 
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
-                    createTextAnnotatable(editText, x, y);
-
-                    editText.setBackgroundResource(R.drawable.input_text_update);
-
-                  
-                    editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                        @Override
-                        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                                
-                                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                                if(mCurrentText != null)
-                                sendAnnotation(mode.toString(), buildSignalFromText(x, y, mCurrentText.getEditText().getText().toString(), false, true));
-                                
-                                //Create annotatable text and add it to the canvas
-                                mAnnotationsActive = false;
-                                try {
-                                    addAnnotatable(mSession.getConnection().getConnectionId());                                  
-                                } catch (Exception e) {
-                                    Log.e(LOG_TAG, e.toString());
-                                }
-                            
-                                    // Ensure UI refresh
-                                    invalidate();
-                                    requestLayout();
-                                    Log.d(LOG_TAG, "Abhi Refreshed UI");
-                                    editText.clearFocus();
-                        
-                                Log.d(LOG_TAG, "Abhi onEditorAction: " + mCurrentText.getEditText().getText().toString());                       
-                                mCurrentText = null;
-                               
-                                return true;
-                            }
-                            return false;
-                        }
-                    });
-
-                    editText.setOnFocusChangeListener(new OnFocusChangeListener() {
-                        @Override
-                        public void onFocusChange(View v, boolean hasFocus) {
-                                if (hasFocus) {
-                                    //got focus
-                                } else {
-                                    Log.d(LOG_TAG, "Focus loss");
-                                    editText.setVisibility(GONE);
-                                }
-                           }
-                        });
-
-                   
-
                     //this code add via abhishek
-                    parent.addView(editText);
+                   
                     addLogEvent(OpenTokConfig.LOG_ACTION_TEXT, OpenTokConfig.LOG_VARIATION_SUCCESS);
                 }
             }

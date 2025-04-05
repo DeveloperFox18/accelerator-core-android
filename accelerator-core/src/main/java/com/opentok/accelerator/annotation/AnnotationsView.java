@@ -1237,7 +1237,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 params.topMargin = (int) (event.getRawY());
                                 params.leftMargin = 5; //(int) (event.getRawX());
                                 Log.d(LOG_TAG, "onGlobalLayout keyboard is open "+keypadHeight);
-                                params.topMargin = keypadHeight + 20; // Move EditText above keyboard
+                                params.topMargin = keypadHeight + getScreenHeightDpi(20); // Move EditText above keyboard
                                 editText.setLayoutParams(params);
                             }
                         }
@@ -1254,7 +1254,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             // Update text after 1 second
                             editText.setBackgroundResource(R.drawable.input_text_update);
                         }
-                    }, 800);
+                    }, 300);
 
 
                     editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -1312,6 +1312,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             Log.d("AnnotationView","mode is null....");
         }
         return true;
+    }
+
+    public static float getScreenHeightDpi(int heightPixels) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return heightPixels / metrics.ydpi;
     }
 
     @Override

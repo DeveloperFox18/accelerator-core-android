@@ -1196,6 +1196,13 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     mAnnotationsActive = true;
                     EditText editText = new EditText(getContext());
                     editText.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
+                    editText.setPadding(15, 0, 15, 0);
+                    editText.setVisibility(VISIBLE);
+                    editText.setSingleLine();
+                    editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                    editText.requestFocus();
+                    editText.setTextSize(12f);
+                    
                     ViewGroup parent = (ViewGroup) this.getParent();
                     if (parent == null) {
                         throw new IllegalStateException("AnnotationsView must have a parent ViewGroup!");
@@ -1206,12 +1213,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         public void onGlobalLayout() {
                           
                            
-                            editText.setPadding(15, 0, 15, 0);
-                            editText.setVisibility(VISIBLE);
-                            editText.setSingleLine();
-                            editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-                            editText.requestFocus();
-                            editText.setTextSize(12f);
+                           
                             Log.d(LOG_TAG, "onGlobalLayout Abhi Refreshed UI");
                             Rect r = new Rect();
                             View rootView = parent.getRootView();
@@ -1229,18 +1231,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 params.topMargin = keypadHeight + 20; // Move EditText above keyboard
                                 editText.setLayoutParams(params);
                             }
-
-                            editText.setOnFocusChangeListener(new OnFocusChangeListener() {
-                                @Override
-                                public void onFocusChange(View v, boolean hasFocus) {
-                                        if (hasFocus) {
-                                            //got focus
-                                        } else {
-                                            Log.d(LOG_TAG, "Focus loss");
-                                            editText.setVisibility(GONE);
-                                        }
-                                   }
-                                });
+                            
                             
                         }
                     });
@@ -1286,17 +1277,17 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     });
 
-                    // editText.setOnFocusChangeListener(new OnFocusChangeListener() {
-                    //     @Override
-                    //     public void onFocusChange(View v, boolean hasFocus) {
-                    //             if (hasFocus) {
-                    //                 //got focus
-                    //             } else {
-                    //                 Log.d(LOG_TAG, "Focus loss");
-                    //                 editText.setVisibility(GONE);
-                    //             }
-                    //        }
-                    //     });
+                    editText.setOnFocusChangeListener(new OnFocusChangeListener() {
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                                if (hasFocus) {
+                                    //got focus
+                                } else {
+                                    Log.d(LOG_TAG, "Focus loss");
+                                    editText.setVisibility(GONE);
+                                }
+                           }
+                        });
 
                    
 

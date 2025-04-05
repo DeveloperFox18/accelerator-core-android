@@ -1237,7 +1237,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 params.topMargin = (int) (event.getRawY());
                                 params.leftMargin = 5; //(int) (event.getRawX());
                                 Log.d(LOG_TAG, "onGlobalLayout keyboard is open "+keypadHeight);
-                                params.topMargin = keypadHeight + getScreenHeightDpi(20); // Move EditText above keyboard
+                                params.topMargin = keypadHeight + (int) getScreenHeightDpi(20); // Move EditText above keyboard
                                 editText.setLayoutParams(params);
                             }
                         }

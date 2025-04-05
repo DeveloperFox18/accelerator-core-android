@@ -862,8 +862,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 float fromY = ((Number) json.get("fromY")).floatValue();
                 float toY = ((Number) json.get("toY")).floatValue();
                 float toX = ((Number) json.get("toX")).floatValue();
-
-                if (platform.equals(SIGNAL_PLATFORM) || platform.equals("web") || platform.equals("ios")) {
+                Log.i(LOG_TAG, "Signal platform "+platform+" SIGNAL_PLATFORM "+SIGNAL_PLATFORM);
+                if (platform.equals(SIGNAL_PLATFORM)) { // || platform.equals("web") || platform.equals("ios")
                     fromX = centerX - (scale * (iCenterX - ((Number) json.get("fromX")).floatValue()));
                     toX = centerX - (scale * (iCenterX - ((Number) json.get("toX")).floatValue()));
 
@@ -1237,7 +1237,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 params.topMargin = (int) (event.getRawY());
                                 params.leftMargin = 5; //(int) (event.getRawX());
                                 Log.d(LOG_TAG, "onGlobalLayout keyboard is open "+keypadHeight);
-                                params.topMargin = keypadHeight + (int) getScreenHeightDpi(20); // Move EditText above keyboard
+                                params.topMargin = keypadHeight + (int) getScreenHeightDpi(23); // Move EditText above keyboard
                                 editText.setLayoutParams(params);
                             }
                         }

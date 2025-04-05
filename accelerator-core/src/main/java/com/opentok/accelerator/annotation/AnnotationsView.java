@@ -1202,11 +1202,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                     EditText editText = new EditText(getContext());
                    
-                    editText.setVisibility(VISIBLE);
+                    //editText.setVisibility(VISIBLE);
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
                     editText.setPadding(15, 0, 15, 0);
-                    editText.setVisibility(VISIBLE);
+                    //editText.setVisibility(VISIBLE);
                     editText.setSingleLine();
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
@@ -1217,6 +1217,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         public void onGlobalLayout() {
                             Log.d(LOG_TAG, "onGlobalLayout Abhi Refreshed UI");
                             Rect r = new Rect();
+                            editText.setVisibility(VISIBLE);
                             View rootView = parent.getRootView();
                             rootView.getWindowVisibleDisplayFrame(r);
                             int screenHeight = rootView.getHeight();

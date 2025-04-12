@@ -908,15 +908,15 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     if (isStartPoint) {
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
-                        Log.d(LOG_TAG," Smoothed Conditions If Condition Start Point To X "+tox+" to Y "+toY);
+                        Log.d(LOG_TAG," Smoothed Conditions If Condition Start Point To X "+toX+" to Y "+toY);
                         mCurrentPath.addPoint(new PointF(toX, toY));
                     } else if (secondPoint) {
-                        Log.d(LOG_TAG," Smoothed Conditions If Condition Second Point To X "+tox+" to Y "+toY);
+                        Log.d(LOG_TAG," Smoothed Conditions If Condition Second Point To X "+toX+" to Y "+toY);
                         beginTouch((toX + mCurrentPath.getEndPoint().x) / 2, (toY + mCurrentPath.getEndPoint().y) / 2);
                         mCurrentPath.addPoint(new PointF(toX, toY));
                     } else {
                         moveTouch(toX, toY, true);
-                        Log.d(LOG_TAG," Smoothed Conditions If Condition Else "+tox+" to Y "+toY);
+                        Log.d(LOG_TAG," Smoothed Conditions If Condition Else "+toX+" to Y "+toY);
                         mCurrentPath.addPoint(new PointF(toX, toY));
 
                         if (endPoint) {

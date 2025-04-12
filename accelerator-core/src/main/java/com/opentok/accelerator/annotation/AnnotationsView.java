@@ -495,7 +495,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 if (curved) {
                     mCurrentPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
                 } else {
-                    Log.d(LOG_TAG, "moveTouch  " + x+" y ");
+                    Log.d(LOG_TAG, "moveTouch  " + x+" y "+y);
                     mCurrentPath.lineTo(x, y);
                 }
             }
@@ -936,9 +936,10 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
                         // We have a straight line
                         beginTouch(fromX, fromY);
+                        Log.d(LOG_TAG," Smoothed Conditions Start and end Both from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
                         moveTouch(toX, toY, false);
                         upTouch();
-                        Log.d(LOG_TAG," Smoothed Conditions Start and end Both from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
+                        
                         try {
                             addAnnotatable(connectionId);
                         } catch (Exception e) {
@@ -951,8 +952,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         Log.d(LOG_TAG,"  Smoothed Conditions Start from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
                         beginTouch(toX, toY);
                     } else if (endPoint) {
-                        moveTouch(toX, toY, false);
                         Log.d(LOG_TAG,"  Smoothed Conditions END from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
+                        moveTouch(toX, toY, false);
+                        
                         upTouch();
                         try {
                             addAnnotatable(connectionId);
@@ -1147,7 +1149,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         final float x = event.getX();
-        final float y = event.getY();
+        final float  y = event.getY();
         Log.d(LOG_TAG, "onTouchEvent--->: " + mode);
         Log.d(LOG_TAG, "onTouchEvent--->: " + oldMode);
         if(oldMode == null){

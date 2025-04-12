@@ -1370,6 +1370,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             }
             if (mCurrentPath != null) {
                 mCurrentPaint.setStyle(Paint.Style.STROKE);
+                Log.d("PathDebug", "Current Path Points: " + mCurrentPath.getPoints().toString() + " Start Point " + mCurrentPath.getStartPoint().toString() + " End Point " +mCurrentPath.getEndPoint().toString());
+
                 canvas.drawPath(mCurrentPath, mCurrentPaint);
             }
         }

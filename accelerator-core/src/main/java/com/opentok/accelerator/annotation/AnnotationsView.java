@@ -933,6 +933,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         beginTouch(fromX, fromY);
                         moveTouch(toX, toY, false);
                         upTouch();
+                        Log.d(' Start and end Both from X '+fromX+ ' fromY '+fromY+ ' to X '+toX+ ' toY '+toY);
                         try {
                             addAnnotatable(connectionId);
                         } catch (Exception e) {
@@ -942,9 +943,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
+                        Log.d(' Start from X '+fromX+ ' fromY '+fromY+ ' to X '+toX+ ' toY '+toY);
                         beginTouch(toX, toY);
                     } else if (endPoint) {
                         moveTouch(toX, toY, false);
+                        Log.d(' END from X '+fromX+ ' fromY '+fromY+ ' to X '+toX+ ' toY '+toY);
                         upTouch();
                         try {
                             addAnnotatable(connectionId);
@@ -953,6 +956,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                         mAnnotationsActive = false;
                     } else {
+                        Log.d(' NOT Start AND NOT END from X '+fromX+ ' fromY '+fromY+ ' to X '+toX+ ' toY '+toY);
                         moveTouch(toX, toY, false);
                         mCurrentPath.addPoint(new PointF(toX, toY));
                     }
@@ -1489,8 +1493,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                 String cid = signalInfo.mSrcConnId;
                 String mycid = signalInfo.mDstConnId;
-//cid.equals(mycid)
-                if (!isSelfSignal) { // Ensure that we only handle signals from other users on the current canvas
+
+                if (!cid.equals(mycid)) { // Ensure that we only handle signals from other users on the current canvas
                     Log.i(LOG_TAG, "Incoming annotation");
                     AnnotationsView.this.setVisibility(VISIBLE);
                     if (!loaded) {

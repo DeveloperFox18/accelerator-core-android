@@ -930,7 +930,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     }
                 } else {
                     Log.d(LOG_TAG," Smoothed Conditions Else Condition ");
-                    if (isStartPoint && endPoint) { 
+                    if (false) { 
+                        // start point && endpoint
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
@@ -951,7 +952,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
                         Log.d(LOG_TAG,"  Smoothed Conditions Start from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
                         beginTouch(toX, toY);
-                    } else if (endPoint) {
+                    } else if (false) {
+                        // only end point 
                         Log.d(LOG_TAG,"  Smoothed Conditions END from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
                         moveTouch(toX, toY, false);
                         
@@ -963,6 +965,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                         mAnnotationsActive = false;
                     } else {
+                        
                         Log.d(LOG_TAG,"  Smoothed Conditions NOT Start AND NOT END from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
                         moveTouch(toX, toY, false);
                         mCurrentPath.addPoint(new PointF(toX, toY));

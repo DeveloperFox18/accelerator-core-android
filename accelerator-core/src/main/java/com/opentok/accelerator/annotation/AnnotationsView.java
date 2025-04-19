@@ -542,6 +542,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             if (!incoming && !isScreenSharing) {
                 sendAnnotation(mode.toString(), null);
             }
+
+            mode = Mode.Pen;
         }
     }
 

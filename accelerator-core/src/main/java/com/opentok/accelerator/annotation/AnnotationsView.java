@@ -495,7 +495,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 if (curved) {
                     mCurrentPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
                 } else {
-                    Log.d(LOG_TAG, "moveTouch  " + x+" y "+y);
+                    Log.d(LOG_TAG, "moveTouch  " + x+" y ");
                     mCurrentPath.lineTo(x, y);
                 }
             }
@@ -542,7 +542,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             if (!incoming && !isScreenSharing) {
                 sendAnnotation(mode.toString(), null);
             }
-            mode = Mode.Pen;
         }
     }
 
@@ -905,19 +904,15 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     }
                 }
                 if (false) {
-                    Log.d(LOG_TAG," Smoothed Conditions If Condition ");
                     if (isStartPoint) {
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
-                        Log.d(LOG_TAG," Smoothed Conditions If Condition Start Point To X "+toX+" to Y "+toY);
                         mCurrentPath.addPoint(new PointF(toX, toY));
                     } else if (secondPoint) {
-                        Log.d(LOG_TAG," Smoothed Conditions If Condition Second Point To X "+toX+" to Y "+toY);
                         beginTouch((toX + mCurrentPath.getEndPoint().x) / 2, (toY + mCurrentPath.getEndPoint().y) / 2);
                         mCurrentPath.addPoint(new PointF(toX, toY));
                     } else {
                         moveTouch(toX, toY, true);
-                        Log.d(LOG_TAG," Smoothed Conditions If Condition Else "+toX+" to Y "+toY);
                         mCurrentPath.addPoint(new PointF(toX, toY));
 
                         if (endPoint) {
@@ -930,18 +925,14 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                     }
                 } else {
-                    Log.d(LOG_TAG," Smoothed Conditions Else Condition ");
                     if (isStartPoint && endPoint) { 
-                        // start point && endpoint isStartPoint && endPoint
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
                         // We have a straight line
                         beginTouch(fromX, fromY);
-                        Log.d(LOG_TAG," Smoothed Conditions Start and end Both from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
                         moveTouch(toX, toY, false);
                         upTouch();
-                        
                         try {
                             addAnnotatable(connectionId);
                         } catch (Exception e) {
@@ -951,13 +942,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
-                        Log.d(LOG_TAG,"  Smoothed Conditions Start from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
                         beginTouch(toX, toY);
                     } else if (endPoint) {
-                        // only end point 
-                        Log.d(LOG_TAG,"  Smoothed Conditions END from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
                         moveTouch(toX, toY, false);
-                        
                         upTouch();
                         try {
                             addAnnotatable(connectionId);
@@ -966,8 +953,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                         mAnnotationsActive = false;
                     } else {
-                        
-                        Log.d(LOG_TAG,"  Smoothed Conditions NOT Start AND NOT END from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
                         moveTouch(toX, toY, false);
                         mCurrentPath.addPoint(new PointF(toX, toY));
                     }
@@ -1153,7 +1138,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         final float x = event.getX();
-        final float  y = event.getY();
+        final float y = event.getY();
         Log.d(LOG_TAG, "onTouchEvent--->: " + mode);
         Log.d(LOG_TAG, "onTouchEvent--->: " + oldMode);
         if(oldMode == null){
@@ -1374,8 +1359,6 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             }
             if (mCurrentPath != null) {
                 mCurrentPaint.setStyle(Paint.Style.STROKE);
-                Log.d("PathDebug", "Current Path Points: " + mCurrentPath.getPoints().toString() + " Start Point " + mCurrentPath.getStartPoint().toString() + " End Point " +mCurrentPath.getEndPoint().toString());
-
                 canvas.drawPath(mCurrentPath, mCurrentPaint);
             }
         }
@@ -1506,8 +1489,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                 String cid = signalInfo.mSrcConnId;
                 String mycid = signalInfo.mDstConnId;
-
-                if (!cid.equals(mycid)) { // Ensure that we only handle signals from other users on the current canvas
+//cid.equals(mycid)
+                if (!isSelfSignal) { // Ensure that we only handle signals from other users on the current canvas
                     Log.i(LOG_TAG, "Incoming annotation");
                     AnnotationsView.this.setVisibility(VISIBLE);
                     if (!loaded) {

@@ -608,6 +608,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 jsonArray.put(cid);
                 sendAnnotation(mode.toString(), jsonArray.toString());
             }
+
+            mode = Mode.Pen;
+
         }
     }
 

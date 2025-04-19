@@ -542,6 +542,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             if (!incoming && !isScreenSharing) {
                 sendAnnotation(mode.toString(), null);
             }
+            mode = Mode.Pen;
         }
     }
 
@@ -930,8 +931,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     }
                 } else {
                     Log.d(LOG_TAG," Smoothed Conditions Else Condition ");
-                    if (false) { 
-                        // start point && endpoint
+                    if (isStartPoint && endPoint) { 
+                        // start point && endpoint isStartPoint && endPoint
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
@@ -952,7 +953,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
                         Log.d(LOG_TAG,"  Smoothed Conditions Start from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
                         beginTouch(toX, toY);
-                    } else if (false) {
+                    } else if (endPoint) {
                         // only end point 
                         Log.d(LOG_TAG,"  Smoothed Conditions END from X "+fromX+ " fromY "+fromY+ " to X "+toX+ " toY "+toY);
                         moveTouch(toX, toY, false);

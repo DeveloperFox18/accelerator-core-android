@@ -21,7 +21,6 @@ public class AnnotationsPath extends Path {
     private PointF startPoint;
     private PointF endPoint;
     private ArrayList<PointF> points;
-   // private ArrayList<UserPoint> points;
     private PointF lastPoint;
 
 
@@ -70,7 +69,6 @@ public class AnnotationsPath extends Path {
         if (points.size() == 0) {
             startPoint = point;
         }
-       // UserPoint userPoint = new UserPoint(point, usertype);
         points.add(point);
         endPoint = point;
     }

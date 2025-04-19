@@ -6,12 +6,6 @@ import android.graphics.PointF;
 import java.util.ArrayList;
 
 
-public enum UserType {
-    SENDER,
-    RECEIVER
-}
-
-
 /**
  * Defines a customizable Path for Android
  */

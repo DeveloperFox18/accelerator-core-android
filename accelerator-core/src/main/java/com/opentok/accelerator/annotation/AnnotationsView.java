@@ -1220,7 +1220,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
                     editText.setTextSize(12f);
-                    editText.setColor(mCurrentColor);
+                    editText.setTextColor(mCurrentColor);
 
                     editText.setBackgroundResource(R.drawable.input_text);
 

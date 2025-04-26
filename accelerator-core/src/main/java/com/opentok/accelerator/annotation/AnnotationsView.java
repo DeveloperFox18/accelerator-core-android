@@ -1163,7 +1163,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                 Log.d(LOG_TAG, "isPenStartFromWeb--->101: " + isPenStartFromWeb);
                 if(isPenStartFromWeb){
                     Toast.makeText(mContext, "Annotation is in progress on the web side. Kindly wait until they finish.", Toast.LENGTH_LONG).show();
-                    return;
+                    return false;
                 }
                 addLogEvent(OpenTokConfig.LOG_ACTION_FREEHAND, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                 switch (event.getAction()) {

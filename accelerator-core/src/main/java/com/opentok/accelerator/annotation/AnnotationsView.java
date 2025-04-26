@@ -57,7 +57,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
     private static final String LOG_TAG = AnnotationsView.class.getSimpleName();
     private static final String SIGNAL_TYPE = "otAnnotation";
     private static final String SIGNAL_PLATFORM = "android";
-
+    private boolean isPenStartFromWeb = false;
     private AnnotationsPath mCurrentPath = new AnnotationsPath();
     private AnnotationsText mCurrentText = new AnnotationsText();
     private Paint mCurrentPaint;
@@ -935,9 +935,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         createPathAnnotatable(false);
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
                         // We have a straight line
+                        isPenStartFromWeb = true;
                         beginTouch(fromX, fromY);
                         moveTouch(toX, toY, false);
                         upTouch();
+                        isPenStartFromWeb = false;
                         try {
                             addAnnotatable(connectionId);
                         } catch (Exception e) {
@@ -947,10 +949,12 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
+                        isPenStartFromWeb = true;
                         beginTouch(toX, toY);
                     } else if (endPoint) {
                         moveTouch(toX, toY, false);
                         upTouch();
+                        isPenStartFromWeb = false;
                         try {
                             addAnnotatable(connectionId);
                         } catch (Exception e) {
@@ -1156,6 +1160,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             mCurrentColor = mSelectedColor;
             if (mode == Mode.Pen) {
                 Log.d(LOG_TAG, "onTouchEvent--->1: " + mode);
+                Log.d(LOG_TAG, "isPenStartFromWeb--->101: " + isPenStartFromWeb);
+                if(isPenStartFromWeb){
+                    Toast.makeText(mContext, "Annotation is in progress on the web side. Kindly wait until they finish.", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 addLogEvent(OpenTokConfig.LOG_ACTION_FREEHAND, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: {

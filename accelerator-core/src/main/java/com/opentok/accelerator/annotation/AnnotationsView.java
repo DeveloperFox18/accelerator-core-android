@@ -1159,20 +1159,22 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         }else{
             mode = oldMode;
         }
+
+        if(isPenStartFromWeb){
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastClickTime > THROTTLE_DELAY) {
+                lastClickTime = currentTime;
+                Toast.makeText(mContext, "Annotation is in progress on the web side. Kindly wait until they finish.", Toast.LENGTH_LONG).show();
+            }
+            return false;
+        }
             
         if (mode != null) {
             mCurrentColor = mSelectedColor;
             if (mode == Mode.Pen) {
                 Log.d(LOG_TAG, "onTouchEvent--->1: " + mode);
                 Log.d(LOG_TAG, "isPenStartFromWeb--->101: " + isPenStartFromWeb);
-                if(isPenStartFromWeb){
-                    long currentTime = System.currentTimeMillis();
-                    if (currentTime - lastClickTime > THROTTLE_DELAY) {
-                        lastClickTime = currentTime;
-                        Toast.makeText(mContext, "Annotation is in progress on the web side. Kindly wait until they finish.", Toast.LENGTH_LONG).show();
-                    }
-                    return false;
-                }
+                
                 addLogEvent(OpenTokConfig.LOG_ACTION_FREEHAND, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: {

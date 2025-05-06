@@ -1238,7 +1238,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     editText.setSingleLine();
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     editText.requestFocus();
-                    editText.setTextSize(20f);
+                    editText.setTextSize(22f);
                     editText.setTextColor(mCurrentColor);
 
                     editText.setBackgroundResource(R.drawable.input_text);
@@ -1356,6 +1356,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
             if (mCurrentText != null && mCurrentText.getEditText() != null && !mCurrentText.getEditText().getText().toString().isEmpty()) {
                 TextPaint textpaint = new TextPaint(mCurrentPaint);
                 textpaint.setStyle(Paint.Style.STROKE); // Ensure text is not filled
+
+                mCurrentPaint.setTextSize(22);
+                textpaint.setTextSize(22);
 
                 String text = mCurrentText.getEditText().getText().toString();
                 Paint borderPaint = new Paint();

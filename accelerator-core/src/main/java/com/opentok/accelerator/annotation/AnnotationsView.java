@@ -72,7 +72,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
     private int mSelectedColor = 0;
     private float mLineWidth = 10.0f;
     private float mIncomingLineWidth = 0.0f;
-    private int mTextSize = 48;
+    private int mTextSize = 70;
     private AnnotationsManager mAnnotationsManager;
 
     private static final float TOLERANCE = 5;

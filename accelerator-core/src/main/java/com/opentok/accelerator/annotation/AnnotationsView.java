@@ -758,7 +758,8 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
         // Build object from JSON array
         try {
             JSONArray updates = new JSONArray(data);
-
+           
+                        
             Log.d(LOG_TAG, "penAnnotations "+updates.toString());
 
             for (int i = 0; i < updates.length(); i++) {
@@ -961,7 +962,20 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         moveTouch(toX, toY, false);
                         upTouch();
                         Log.d(LOG_TAG, "penAnnotations function calling when i have endPoint");
-                        // isPenStartFromWeb = false; 
+
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        Runnable debounceRunnable;
+                        if(debounceRunnable != null){
+                            handle.removeCallbacks(debounceRunnable);
+                        }
+
+                        debounceRunnable = new Runnable(){
+                            public void run(){
+                                isPenStartFromWeb = false; 
+                            }
+                        }
+                        handler.postDelayed(debounceRunnable, 800);
+                        
                         try {
                             addAnnotatable(connectionId);
                         } catch (Exception e) {

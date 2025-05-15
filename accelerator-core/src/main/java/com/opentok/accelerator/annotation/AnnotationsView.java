@@ -944,7 +944,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         beginTouch(fromX, fromY);
                         moveTouch(toX, toY, false);
                         upTouch();
-                        isPenStartFromWeb = false;
+                        // isPenStartFromWeb = false;
                         try {
                             addAnnotatable(connectionId);
                         } catch (Exception e) {
@@ -961,7 +961,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         moveTouch(toX, toY, false);
                         upTouch();
                         Log.d(LOG_TAG, "penAnnotations function calling when i have endPoint");
-                        isPenStartFromWeb = false;
+                        // isPenStartFromWeb = false; 
                         try {
                             addAnnotatable(connectionId);
                         } catch (Exception e) {
@@ -969,6 +969,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         }
                         mAnnotationsActive = false;
                     } else {
+                        Log.d(LOG_TAG, "penAnnotations function calling else");
                         moveTouch(toX, toY, false);
                         mCurrentPath.addPoint(new PointF(toX, toY));
                     }

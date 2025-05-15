@@ -965,14 +965,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
 
                         Handler handler = new Handler(Looper.getMainLooper());
                         Runnable debounceRunnable;
-                        if(debounceRunnable != null){
-                            handler.removeCallbacks(debounceRunnable);
-                        }
-
+                       
                         debounceRunnable = new Runnable() {
                             @Override
                             public void run() {
-                                moveTouch(toX, toY, false);
+                                isPenStartFromWeb = false;
                             }
                         };
                         handler.postDelayed(debounceRunnable, 800);

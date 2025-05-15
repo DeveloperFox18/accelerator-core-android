@@ -939,6 +939,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         createPathAnnotatable(false);
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
                         // We have a straight line
+                        Log.d(LOG_TAG, "penAnnotations function calling when i have isStartPoint && endPoint");
                         isPenStartFromWeb = true;
                         beginTouch(fromX, fromY);
                         moveTouch(toX, toY, false);
@@ -950,6 +951,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             Log.e(LOG_TAG, e.toString());
                         }
                     } else if (isStartPoint) {
+                        Log.d(LOG_TAG, "penAnnotations function calling when i have isStartPoint");
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
                         mCurrentPath.addPoint(new PointF(fromX, fromY));
@@ -958,6 +960,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     } else if (endPoint) {
                         moveTouch(toX, toY, false);
                         upTouch();
+                        Log.d(LOG_TAG, "penAnnotations function calling when i have endPoint");
                         isPenStartFromWeb = false;
                         try {
                             addAnnotatable(connectionId);

@@ -972,7 +972,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                                 isPenStartFromWeb = false;
                             }
                         };
-                        handler.postDelayed(debounceRunnable, 800);
+                        handler.postDelayed(debounceRunnable, 2000);
                         
                         try {
                             addAnnotatable(connectionId);

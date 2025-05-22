@@ -913,7 +913,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         smoothed = (boolean) json.get("smoothed");
                     }
                 }
-                if (false) {
+                if (smoothed) {
                     if (isStartPoint) {
                         mAnnotationsActive = true;
                         createPathAnnotatable(false);
@@ -945,7 +945,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         beginTouch(fromX, fromY);
                         moveTouch(toX, toY, false);
                         upTouch();
-                        // isPenStartFromWeb = false;
+                        isPenStartFromWeb = false;
                         try {
                             addAnnotatable(connectionId);
                         } catch (Exception e) {
@@ -962,17 +962,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         moveTouch(toX, toY, false);
                         upTouch();
                         Log.d(LOG_TAG, "penAnnotations function calling when i have endPoint");
-
-                        Handler handler = new Handler(Looper.getMainLooper());
-                        Runnable debounceRunnable;
-                       
-                        debounceRunnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                isPenStartFromWeb = false;
-                            }
-                        };
-                        handler.postDelayed(debounceRunnable, 2000);
+                        isPenStartFromWeb = false;
                         
                         try {
                             addAnnotatable(connectionId);

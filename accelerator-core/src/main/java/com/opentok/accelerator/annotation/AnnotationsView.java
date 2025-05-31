@@ -1187,10 +1187,15 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         Log.d(LOG_TAG, "onTouchEvent ACTION_DOWN " + x+" y "+y);
                         addLogEvent(OpenTokConfig.LOG_ACTION_START_DRAWING, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                         // mAnnotationsActive = true;
-                        JSONObject messageObj = new JSONObject();
-                        messageObj.put("status","true");
-                        messageObj.put("from",SIGNAL_PLATFORM);
-                        mSession.sendSignal(new SignalInfo(mSession.getConnection().getConnectionId(), null, "isPenActive", messageObj), null);
+                        try {
+                            JSONObject messageObj = new JSONObject();
+                            messageObj.put("status","true");
+                            messageObj.put("from",SIGNAL_PLATFORM);
+                            mSession.sendSignal(new SignalInfo(mSession.getConnection().getConnectionId(), null, "isPenActive", messageObj), null);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                       
                         createPathAnnotatable(false);
                         beginTouch(x, y);
                         mCurrentPath.addPoint(new PointF(x, y));
@@ -1212,10 +1217,14 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         Log.d(LOG_TAG, "onTouchEvent ACTION_UP " + x+" y "+y);
                         addLogEvent(OpenTokConfig.LOG_ACTION_END_DRAWING, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                         upTouch();
+                        try {
                         JSONObject messageObj = new JSONObject();
                         messageObj.put("status","false");
                         messageObj.put("from",SIGNAL_PLATFORM);
                         mSession.sendSignal(new SignalInfo(mSession.getConnection().getConnectionId(), null, "isPenActive", messageObj), null);
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         sendAnnotation(mode.toString(), buildSignalFromPoint(x, y, false, true));
                         try {
                             addAnnotatable(mSession.getConnection().getConnectionId());

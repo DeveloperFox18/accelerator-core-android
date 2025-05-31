@@ -1191,7 +1191,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                             JSONObject messageObj = new JSONObject();
                             messageObj.put("status","true");
                             messageObj.put("from",SIGNAL_PLATFORM);
-                            mSession.sendSignal(new SignalInfo(mSession.getConnection().getConnectionId(), null, "isPenActive", messageObj), null);
+                            mSession.sendSignal(new SignalInfo(mSession.getConnection().getConnectionId(), null, "isPenActive", messageObj.toString()), null);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -1221,7 +1221,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         JSONObject messageObj = new JSONObject();
                         messageObj.put("status","false");
                         messageObj.put("from",SIGNAL_PLATFORM);
-                        mSession.sendSignal(new SignalInfo(mSession.getConnection().getConnectionId(), null, "isPenActive", messageObj), null);
+                        mSession.sendSignal(new SignalInfo(mSession.getConnection().getConnectionId(), null, "isPenActive", messageObj.toString()), null);
                         }catch (JSONException e) {
                             e.printStackTrace();
                         }

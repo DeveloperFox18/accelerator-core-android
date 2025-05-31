@@ -1189,9 +1189,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         // mAnnotationsActive = true;
                         JSONObject messageObj = new JSONObject();
                         messageObj.put("status",true);
-                        messageObj.put("from",SIGNAL_PLATFORM)
+                        messageObj.put("from",SIGNAL_PLATFORM);
 
-                        session.sendSignal("isPenActive",messageObj.toString())
+                        session.sendSignal("isPenActive",messageObj.toString());
                         createPathAnnotatable(false);
                         beginTouch(x, y);
                         mCurrentPath.addPoint(new PointF(x, y));
@@ -1215,9 +1215,9 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         upTouch();
                         JSONObject messageObj = new JSONObject();
                         messageObj.put("status",false);
-                        messageObj.put("from",SIGNAL_PLATFORM)
+                        messageObj.put("from",SIGNAL_PLATFORM);
 
-                        session.sendSignal("isPenActive",messageObj.toString())
+                        session.sendSignal("isPenActive",messageObj.toString());
                         sendAnnotation(mode.toString(), buildSignalFromPoint(x, y, false, true));
                         try {
                             addAnnotatable(mSession.getConnection().getConnectionId());

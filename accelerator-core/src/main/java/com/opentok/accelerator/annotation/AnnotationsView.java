@@ -1186,7 +1186,12 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                     case MotionEvent.ACTION_DOWN: {
                         Log.d(LOG_TAG, "onTouchEvent ACTION_DOWN " + x+" y "+y);
                         addLogEvent(OpenTokConfig.LOG_ACTION_START_DRAWING, OpenTokConfig.LOG_VARIATION_ATTEMPT);
-                        mAnnotationsActive = true;
+                        // mAnnotationsActive = true;
+                        JSONObject messageObj = new JSONObject();
+                        messageObj.put("status",true);
+                        messageObj.put("from",SIGNAL_PLATFORM)
+
+                        session.sendSignal("isPenActive",messageObj.toString())
                         createPathAnnotatable(false);
                         beginTouch(x, y);
                         mCurrentPath.addPoint(new PointF(x, y));
@@ -1208,6 +1213,11 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         Log.d(LOG_TAG, "onTouchEvent ACTION_UP " + x+" y "+y);
                         addLogEvent(OpenTokConfig.LOG_ACTION_END_DRAWING, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                         upTouch();
+                        JSONObject messageObj = new JSONObject();
+                        messageObj.put("status",false);
+                        messageObj.put("from",SIGNAL_PLATFORM)
+
+                        session.sendSignal("isPenActive",messageObj.toString())
                         sendAnnotation(mode.toString(), buildSignalFromPoint(x, y, false, true));
                         try {
                             addAnnotatable(mSession.getConnection().getConnectionId());
@@ -1215,7 +1225,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         } catch (Exception e) {
                             Log.e(LOG_TAG, e.toString());
                         }
-                        mAnnotationsActive = false;
+                        // mAnnotationsActive = false;
                         invalidate();
                         addLogEvent(OpenTokConfig.LOG_ACTION_END_DRAWING, OpenTokConfig.LOG_VARIATION_SUCCESS);
                     }

@@ -1188,7 +1188,7 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         addLogEvent(OpenTokConfig.LOG_ACTION_START_DRAWING, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                         // mAnnotationsActive = true;
                         JSONObject messageObj = new JSONObject();
-                        messageObj.put("status",true);
+                        messageObj.put("status","true");
                         messageObj.put("from",SIGNAL_PLATFORM);
 
                         mSession.sendSignal("isPenActive",messageObj.toString());
@@ -1214,10 +1214,10 @@ public class AnnotationsView extends ViewGroup implements AnnotationsToolbar.Act
                         addLogEvent(OpenTokConfig.LOG_ACTION_END_DRAWING, OpenTokConfig.LOG_VARIATION_ATTEMPT);
                         upTouch();
                         JSONObject messageObj = new JSONObject();
-                        messageObj.put("status",false);
+                        messageObj.put("status","false");
                         messageObj.put("from",SIGNAL_PLATFORM);
 
-                        mSession.sendSignal("isPenActive",messageObj.toString());
+                        mSession.sendAnnotation("isPenActive",messageObj.toString());
                         sendAnnotation(mode.toString(), buildSignalFromPoint(x, y, false, true));
                         try {
                             addAnnotatable(mSession.getConnection().getConnectionId());
